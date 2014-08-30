@@ -1,0 +1,73 @@
+
+{% extends "leftsidebar.html" %}
+{% block maincontent %}
+{% load customtags %}
+{% load fb_versions %}
+{% set title %}Конгресс интеллигенции против войны: {{listtitle}} {% endset %}
+{% set description %}Все материалы Конгресса за {{listitle}} {% endset %}
+
+
+
+<h1>{{listtitle}}</h1>
+<div class="spacer-1" style="background:#BCBCBC;color:#BCBCBC;"></div>
+
+{% load comments %}
+{% load pagination_tags %}
+
+{% autopaginate object_list 3 %}
+<div class="blog-style">
+{% for item in object_list %}
+                                
+                                     {% get_comment_count for item as comment_count %}
+                                <div class="item {% if item.photos.all|length %}image-small{% else %}image-no{% endif %}  ">
+                                {% if item.photos.all|length %}
+                                    <div class="item-header">
+                                    
+                                    {% if comment_count %}
+                                        <a href="{{item.get_absolute_url}}#comments" class="item-comment"><span>{{comment_count}}</span><i></i></a>
+                                        {% endif %}
+                                        <a href="{{item.get_absolute_url}}" class="item-photo"><img src="{% with item.photos.all|first as ph %}{{ph.list_thumbnail.url}}{% endwith %}" alt=""></a>
+                                    </div>
+                                    {% endif %}
+                                    <div class="item-content">
+                                        <h3><a href="{{item.get_absolute_url}}">{{item.title}}</a>{% if comment_count and not item.photos.all|length %}
+                                            <a href="{{item.get_absolute_url}}#comments" class="item-comment"><span>{{comment_count}}</span></a>
+                                        {% endif %}</h3>
+                                     <div class="item-icons">
+                                                    <a href="blog.html"><i class="fa fa-calendar"></i>{{item.date|date:"d E Y"}}</a>
+                                                    {% load customtags %}
+                                                    {% if not object|to_class_name == 'ContentCategory' %}
+                                                        <a href="{{item.category.get_absolute_url}}"><i class="fa fa-{{item.category.icon}}"></i>{{item.category.title}}</a>
+                                                    {% endif %}
+                                                  
+                                                    {% if item.author and item.author.id != 7 %}
+                                                    <a href="{{item.author.get_absolute_url}}"><i class="fa fa-user"></i>{{item.author.name}}</a>
+                                                  {% endif %}
+                                                </div>
+                                  <div style="margin-bottom:10px">
+                                          {{item.text|striptags|no_dumb_chars|truncatechars:"500"}}</div>
+                                      <a href="{{item.get_absolute_url}}" class="trans-button">Читать дальше</a>
+                                    </div>
+
+                                    <div class="clear-float"></div>
+
+                                </div>
+                                
+                              {% endfor %}
+                                
+    
+{% paginate %}
+                            <!-- END .block-content -->
+                            </div>
+
+
+{% endblock maincontent %}
+
+{% block sidebar1 %}
+
+
+   {% include "sidebar_actual.html" %}
+   {% include "sidebar_adv.html" %}
+    
+{% endblock sidebar1 %}
+

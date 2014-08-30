@@ -1,0 +1,30 @@
+{% if object.videos.all|length > 0 %}
+    {% load embed_video_tags %}
+
+{% for item in object.videos.all %}
+    <div class="strict-block">
+                            <div class="block-title">
+                                <h2>{{item.title}}</h2>
+                                
+                            </div>
+                            <!-- BEGIN .block-content -->
+                           
+<div class="video-container">
+
+
+
+{% video item.video '560x315' %}
+  </div>
+ 
+</div>
+
+      
+
+                            <!-- END .block-content -->
+                          
+{% endfor %}
+
+
+
+
+{% endif %}

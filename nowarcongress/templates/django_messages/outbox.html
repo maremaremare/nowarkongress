@@ -1,0 +1,29 @@
+
+{% extends "django_messages/base.html" %} 
+{% load i18n %} 
+{% load url from future %}
+
+{% block maincontent %} 
+<h1>{% trans "Sent Messages" %}</h1>
+<div class="spacer-1" style="background:#BCBCBC;color:#BCBCBC;"></div>
+{% if message_list %} 
+<table class="messagestable"> 
+
+    <tbody>
+{% for message in message_list %} 
+    <tr>
+        <td><a href="{{message.recipient.get_absolute_url}}" class="author-photo"><img src="{{message.recipient.micro_thumbnail.url}}" alt="">{{ message.recipient.name }}</a></td>
+
+        <td>
+        <a href="{{ message.get_absolute_url }}">{{ message.subject }}</a>
+        </td>
+        <td>{{ message.sent_at|date:"d E Y H:i" }}</td>
+        <td><a href="{% url 'messages_delete' message.id %}?next={% url 'messages_outbox' %}">{% trans "delete" %}</a></td>
+    </tr>
+{% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>{% trans "No messages." %}</p>
+{% endif %}   
+{% endblock %}

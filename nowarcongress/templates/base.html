@@ -1,0 +1,301 @@
+<!DOCTYPE HTML>
+<!-- BEGIN html -->
+<html lang = "en">
+	<!-- BEGIN head -->
+	<head>
+	{% load customtags fb_versions %}
+	{% load sitemetrics %}
+	{% load compress %}
+		<title> {% get title %}</title>
+
+		<!-- Meta Tags -->
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="description" content="Конгресс интеллигенции против войны. Официальный сайт." />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta property="og:title" content="{% get title %}"/> 
+		<meta property="og:description" content="{% get description %}"/> 
+		<meta property="og:site_name" content="Конгресс интеллигенции против войны"/>
+		<meta property="og:image" content="{{ STATIC_URL }}images/dove.jpg" />
+
+		<!-- Favicon -->
+		<link rel="shortcut icon" href="{{ STATIC_URL }}images/favicon.ico" type="image/x-icon" />
+
+	<!-- Stylesheets -->
+
+{% compress css %}
+		<link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/reset.css" />
+		<link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/font-awesome.min.css" />
+		<link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/fonts.css" />
+		<link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.min.css" />
+{% endcompress %}
+	<link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/main-stylesheet.css" />
+		<link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/custom-fonts.css" />
+	
+		<link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/custom-colors.css" />
+		
+
+
+	
+
+
+
+
+		<!--[if lte IE 8]>
+		<link type="text/css" rel="stylesheet" href="css/ie-ancient.css" />
+		<![endif]-->
+
+
+
+	<!-- END head -->
+	</head>
+
+	<!-- BEGIN body -->
+	<body>
+
+		<!-- BEGIN .boxed -->
+		<div class="container boxed active">
+			
+			<!-- BEGIN .header -->
+			<header class="header">
+
+				<div class="header-topmenu ">
+					<!-- BEGIN .wrapper -->
+					<div class="wrapper ">
+	
+
+						<span class="left" id="ya_share3"></span><span class="b-share-btn__wrap left"><a rel="nofollow" target="_blank" title="RSS Feed" href="http://nowarcongress.com/feed/"><span class="rss"><i class="fa fa-rss"></i> </span></a></span>
+
+<div class="searchformdiv">
+						<form method="get" action="/search/">
+								
+							<input id="id_q" name="q" type="text" placeholder="Поиск..." value="" >
+							
+							</form>
+							</div>
+						<ul class="right ot-menu-add" rel="Верхнее меню">
+							
+
+
+							{% if user.is_authenticated %}
+							<li><a href="/profile/"><img src="{% version user.profile.photo 'micro_thumbnail' %}" class="topusericon"> {{user.profile.name}}</a>
+
+<ul>
+
+									<li><a href="/profile/">Мой профиль</a></li>
+									<li><a href="/profile/create/">Новый материал на сайт</a></li>
+									<li><a href="/profile/messages/">Сообщения</a></li>
+									<!--<li><a href="/profile/invite/">Послать приглашение</a></li>-->
+									<li><a href="/logout/">Выйти</a></li>
+
+								</ul>
+
+
+							</li>
+							{% else %}
+							<li><a href="/howtoregister/">Стать членом конгресса</a></li>
+							<li><a href="/login-form/?next={{ request.path }}"><span>Войти</span></a><ul>
+
+									<li><a href="/login/google-oauth2/?next={{ request.path }}">Google</a></li>
+									<li><a href="/login/facebook/?next={{ request.path }}">Facebook</a></li>
+									<li><a href="/login-form/?next={{ request.path }}">E-mail</a></li>
+									
+
+								</ul>
+							</li>
+   
+{% endif %}
+							
+
+							<li><a href="http://nowarcongress.com">В начало</a>	
+							<li><a href="#"><span>Все материалы</span></a>
+								<ul>
+									<li><a href="/blogs/">Блоги</a></li>
+									<li><a href="/publications/">Публикации</a></li>
+									<li><a href="/ng/">Публикации в Новой Газете</a></li>
+									<li><a href="/events/">Отчеты о мероприятиях</a></li>
+									<li><a href="/reports/">Тексты докладов</a></li>
+								</ul>
+							</li>
+						<!--	<li><a href="/contacts/">Контакты</a></li>-->
+
+						</ul>
+
+
+
+						
+			
+					<!-- END .wrapper -->
+					</div>
+
+				</div>
+				
+				<!-- BEGIN .wrapper -->
+				<div class="wrapper">
+
+
+					<div class="wraphead header-2-content">
+				
+						<div class="header-logo hidden-xs hidden-sm">
+							<a href="/"><span class="logobig">Конгресс интеллигенции</span><span class="logosmall">против войны, самоизоляции России, реставрации тоталитаризма</span></a>
+						</div>
+
+						<div class="header-logo small-header-logo visible-xs visible-sm">
+							<a href="/"><span class="logobig smalllogobig">Конгресс интеллигенции</span><span class="logosmall smalllogosmall">против войны, самоизоляции России, реставрации тоталитаризма</span></a>
+						</div>
+		
+					<!--	<div class="header-search">
+							<form action="search.html">
+								<i class="fa fa-search"></i>
+								<input type="text" placeholder="Type &amp; hit enter" value="" class="search-box" />
+							</form>
+						</div>-->
+					</div> 
+					
+				<!-- END .wrapper -->
+				</div>
+
+					<div id="main-menu" >
+						<!-- BEGIN .wrapper -->
+						<div class="wrapper">
+
+{% include "mainmenu.html" %}
+
+
+							
+						<!-- END .wrapper -->
+						</div>
+					</div>
+					
+					<div class="menu-overlay"></div>
+
+					<div id="top-sub-menu" class="hidden-md">
+						<!-- BEGIN .wrapper -->
+						<div class="wrapper">
+							
+							<ul class="ot-menu-add" rel="Наши партнеры">
+								<li>Наши партнеры</li>
+								{% for partner in partners %}
+									<li><a href="{{partner.link}}">{{partner.title}}</a></li>
+								{% endfor %}
+								
+		
+							</ul>
+
+						<!-- END .wrapper -->
+						</div>
+					</div>
+				
+			<!-- END .header -->
+			</header>
+			
+			<!-- BEGIN .content -->
+			<section class="content">
+           {% include "jumplist.html" %}
+                
+                 {% block content %}
+                   
+               {% endblock content %}
+     
+			
+			</section>
+			
+		{% include "footer.html" %}
+			
+		<!-- END .boxed -->
+		</div>
+
+
+	
+	<!-- END body -->
+	</body>
+
+
+
+		<!-- Scripts -->
+
+		<script type="text/javascript" src="{{ STATIC_URL }}jscript/jquery-latest.min.js"></script>
+		<script type="text/javascript" src="{{ STATIC_URL }}jscript/bootstrap.js"></script>
+		<script type="text/javascript" src="{{ STATIC_URL }}jscript/theme-scripts.js"></script>
+		<script type="text/javascript" async src="{{ STATIC_URL }}jscript/ot-menu.js"></script>
+		<script type="text/javascript" src="{{ STATIC_URL }}jscript/greensock.js"></script>
+		<!--<script type="text/javascript" src="https://www.google.com/recaptcha/api/js/recaptcha_ajax.js"></script>-->
+		<script type="text/javascript" src="{{ STATIC_URL }}jscript/popup.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}fluent_comments/js/ajaxcomments.js"></script>
+<script src="{{ STATIC_URL }}owl-carousel/owl.carousel.js"></script>
+<script src="{{ STATIC_URL }}jscript/unslider.min.js"></script>
+
+
+<script type="text/javascript" src="{{ STATIC_URL }}jscript/yashare.js" charset="utf-8"></script>
+
+
+
+<script type="text/javascript">
+// Test for the ugliness.
+if (window.location.hash == '#_=_'){
+
+    // Check if the browser supports history.replaceState.
+    if (history.replaceState) {
+
+        // Keep the exact URL up to the hash.
+        var cleanHref = window.location.href.split('#')[0];
+
+        // Replace the URL in the address bar without messing with the back button.
+        history.replaceState(null, null, cleanHref);
+
+    } else {
+
+        // Well, you're on an old browser, we can get rid of the _=_ but not the #.
+        window.location.hash = '';
+
+    }
+
+} 
+
+</script>
+
+{% block customjs %}
+	
+{% endblock customjs %}
+
+
+
+
+<script>
+{% block sharejs %}
+{% endblock sharejs %}
+{% block sharejs2 %}
+{% endblock sharejs2 %}
+new Ya.share({
+        element: 'ya_share3',
+        theme: 'counter',
+            elementStyle: {
+                'type': 'button',
+                'border': true,
+                'quickServices':  [ 'facebook', 'twitter', 'vkontakte', 'gplus']},
+            title: 'Конгресс интеллигенции против войны',
+            link: 'http://nowarcongress.com',
+            image: '{{ STATIC_URL }}images/dove.jpg',
+            description: 'Сайт конгресса интеллигенции против войны, самоизоляции России, реставрации тоталитаризма. Публикации, блоги, новости, мероприятия.',
+            serviceSpecific: {
+                twitter: {
+                    title: '#КонгрессИнтеллигенцииПротивВойны'
+               },
+
+        }
+});</script>
+
+
+{% sitemetrics by yandex for "25557890" %}
+{% compress css %}
+		<link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/lightbox.css" />
+		<link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/shortcodes.css" />
+		
+		<link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/layerslider.css" />
+	    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}fluent_comments/css/ajaxcomments.css" />
+		<link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/ot-menu.css" />
+		<link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/popup.css" />
+        <link rel="stylesheet" href="{{ STATIC_URL }}owl-carousel/owl.carousel.css">
+        <link rel="stylesheet" href="{{ STATIC_URL }}owl-carousel/owl.theme.css">
+ {% endcompress %}
+<!-- END html -->
+</html>

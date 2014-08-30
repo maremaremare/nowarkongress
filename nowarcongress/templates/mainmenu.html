@@ -1,0 +1,21 @@
+
+<ul class="ot-menu-add" rel="Главное меню">
+{% load mptt_tags %}
+    {% recursetree nodes %}
+        <li>
+          <a href="{% if node.path %}
+              {{node.path}}{% else %}{{node.content_object.get_absolute_url}}{% endif %}">
+              <span>{{ node.title }}<i>{{node.subtitle}}</i></span></a>
+            {% if not node.is_leaf_node %}
+            {% if children %}
+                <ul class="children">
+                    {{ children }}
+                </ul>
+            {% endif %}
+             {% endif %}
+        </li>
+    {% endrecursetree %}
+
+
+</ul>
+

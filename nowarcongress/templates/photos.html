@@ -1,0 +1,33 @@
+{% if object.photos.all|length > 1 %}
+   {% load fb_versions %} 
+
+
+<div class="strict-block">
+                            <div class="block-title">
+                                <h2>Фото</h2>
+                                
+                            </div>
+                            <!-- BEGIN .block-content -->
+                           
+
+
+      
+<div class="photoCarouselSingle owl-carousel owl-theme">
+
+{% for photo in object.photos.all %}
+    <div class="item"><img src="{% version photo.image 'owlcarousel_thumbnail' %}" alt="{{photo.title}}"></div>
+{% endfor %}
+ 
+  
+  
+ 
+</div>
+
+      
+
+                            <!-- END .block-content -->
+                            </div>
+
+
+
+{% endif %}

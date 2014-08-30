@@ -1,0 +1,20 @@
+<div class="item col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                                              {% load comments fb_versions %}
+                                    {% get_comment_count for item as comment_count %}
+                                    {% if comment_count %}
+                                        <a href="{{item.get_absolute_url}}#comments" class="item-comment"><span>{{comment_count}}</span><i></i></a>
+                                        {% endif %}
+                                                <div class="item-photo">
+                                                    <a href="{{item.get_absolute_url}}"><img src="{% with item.photos.all|first as ph %}{% version ph.image 'adv_thumbnail' %}{% endwith %}" alt=""></a>
+                                                </div>
+                                                <div class="item-content">
+                                                    <h3><a href="{{item.get_absolute_url}}">{{item.title}}</a></h3>
+                                         {% if item.author and item.author.id != 7 %}
+                                             <div class="item-author">
+                                            <a href="{{item.author.get_absolute_url}}" class="author-photo"><img src="{% version item.author.photo 'micro_thumbnail' %}" alt="{{item.author.name}}"></a>
+                                            <a href="{{item.author.get_absolute_url}}" class="author-name">{{item.author.name}}</a>
+                                        </div>
+                                         {% endif %}
+                                                    
+                                                </div>
+                                            </div>

@@ -1,0 +1,32 @@
+    {% extends "base.html" %}
+    <!-- BEGIN .content -->
+           {% block content %}
+               
+          
+
+            
+                
+               
+                    
+                    <!-- .with-sidebar / .with-sidebar-both / .with-middle -->
+
+    <aside id="sidebar" class="col-lg-3">
+{% block sidebar1 %}
+    
+{% endblock sidebar1 %}
+</aside>
+                
+               <div class=" col-lg-9">
+
+                   {% block maincontent %}
+                       
+                   {% endblock maincontent %}
+
+                        
+                        </div>       
+               
+
+                    
+                
+                
+   {% endblock content %}

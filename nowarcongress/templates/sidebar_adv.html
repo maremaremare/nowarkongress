@@ -1,0 +1,21 @@
+{% if advs %}
+    
+{% load fb_versions %}
+<div class="widget">
+                            <h3>Конгресс рекомендует</h3>
+                           
+                                
+                          
+                            <div class="middle-articles">
+                             {% for item in advs %}
+                                <div class="item">
+                                   {% with item.photos.all|first as photo %}
+                                    <a href="{{item.get_absolute_url}}"><img src="{% version photo.image 'adv_thumbnail' %}" alt="{{photo.title}}"></a>
+                                    {% endwith %}
+                                    <h4><a href="{{item.get_absolute_url}}">{{item.title}}</a></h4>
+                                </div>
+                                {% endfor %}
+                            </div>
+                              
+                        </div>
+                        {% endif %}

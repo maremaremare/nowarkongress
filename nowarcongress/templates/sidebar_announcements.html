@@ -1,0 +1,44 @@
+{% if sidebar_announcements %}
+    
+
+<div class="widget">
+                            <h3>Анонсы</h3>
+                
+                            <div class="w-news-list">
+                     
+
+                          
+                
+                                {% for item in sidebar_announcements %}
+                           
+                          
+                                                                    <!-- BEGIN .item -->
+                                <div class="item">
+                              
+                                        <h4><a href="{{item.get_absolute_url}}">{{item.title}}</a></h4>
+                                        <p>{{item.text|safe|truncatewords_html:"15"}}</p>
+                                        <div class="item-foot">
+                                            <a href="{{item.item.get_absolute_url}}"></i><b>Читать полностью</b></a>
+                                             {% if item.an_event.all|length %}
+                                            <a href="{{item.item.get_absolute_url}}"><i class="fa fa-clock-o"></i>
+                                            {% with item.an_event.all|first as event %}
+                                                {{event.date|date:"d E"}}</a>
+                                            {% endwith %}
+
+                                            
+                                            {% endif %}   
+                     
+                                        </div>
+                                    
+                                <!-- END .item -->
+                                </div>
+                                {% endfor %}
+
+                                
+                              
+
+                            </div>
+                        <!-- END .widget -->
+                        </div>
+
+                        {% endif %}

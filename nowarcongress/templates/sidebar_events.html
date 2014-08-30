@@ -1,0 +1,33 @@
+{% if events %}
+    
+
+<div class="widget">
+                            <h3>Все сессии конгресса</h3>
+                
+                            <div class="w-news-list">
+                     
+
+                          
+                
+                                {% for item in events %}
+                           
+                          
+                                                                    <!-- BEGIN .item -->
+                                <div class="item">
+                              
+                                        <h4><a href="{{item.get_absolute_url}}">{{item.title}}</a></h4>
+                                        
+                                   
+                                    
+                                <!-- END .item -->
+                                </div>
+                                {% endfor %}
+
+                                
+                              
+
+                            </div>
+                        <!-- END .widget -->
+                        </div>
+
+                        {% endif %}

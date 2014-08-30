@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+      {% load crispy_forms_tags %}
+
+<div class="strict-block col-lg-12">
+                            <div class="block-title">
+                                <h2>Зарегистрироваться</h2>
+                            </div>
+
+                            <!-- BEGIN .block-content -->
+                            <div class="block-content main-article">
+                            <form action="."   method="post">{% csrf_token %}
+
+    {{ form|crispy }}
+    <input type="submit" value="Зарегистрироваться" />
+
+                    
+                            <!-- END .block-content -->
+                            </div>
+                        <!-- END .strict-block -->
+                        </div>
+
+
+
+{% endblock content %}
+
+{% load customtags %}
+{% set title %}Конгресс интеллигенции против войны: регистрация{% endset %}
+{% set description %}Регистрация{% endset %}

@@ -1,0 +1,145 @@
+{% extends "leftsidebar.html" %}
+
+{% block maincontent %}
+
+    
+{% load customtags %}
+{% load fb_versions %}
+{% set title %}Конгресс интеллигенции против войны: {{object.title}}{% if object.author %} ({{object.author}}){% endif %}{% endset %}
+{% set description %}{{object.text|striptags|truncatewords:"40"}} {% endset %}
+
+
+<div class="strict-block">
+    <div class="main-article">
+                                <h1 class="article-h1">{{object.title}} {% if user.is_authenticated and user.profile == object.author %}
+                                    <a class="editbutton" href="{{object.get_absolute_url}}/delete/">удалить</a><a class="editbutton" href="{{object.get_absolute_url}}/update/">редактировать</a>
+                                       <a class="editbutton 
+                                       {% if object.get_moderation_status == 0 %}rejected{% elif object.get_moderation_status == 1 %}accepted{% else %}waiting{% endif %}"> {{object.get_moderation_text}}</a>
+                                       {% endif %}</h1>
+
+                                <div class="article-header">
+                       {% if object.photos.all|length %}
+                          {% with object.photos.all|first as ph %}
+                <img src="{% version ph.image 'slmax_thumbnail' %}" class="article-photo" alt="ph.title" />{% endwith %}
+            {% endif %}
+                          <div class="article-meta">
+                                    
+               
+                <div class="meta-date">
+               
+                      <h3 class="eventdate">Дата: {{object.event.date|date:"d E Y" }}</h3>  
+             
+                 </div>
+  
+
+                       <div class="meta-tools">
+
+                                              <a style="padding-bottom:10px" href="/announcements/"><i class="fa fa-{{object.category.icon}}"></i>{{object.category.title}}</a>
+                                         
+                                           
+                                           
+                            
+                                            
+                                        </div>
+
+                  </div>
+            
+                                      
+                                       
+                                   
+                              
+                       
+                                    </div>
+                           
+
+
+                                {{ object.text|safe }}
+
+                          
+
+                   
+
+
+
+                                <div class="social-article">
+                                    <div class="custom-title"><strong>Поделиться:</strong></div>
+                                    <span id="ya_share2"></span>
+                                </div>
+
+                                <hr />
+                                {% if object.tags.all %}
+                                       <div class="tag-cloud">
+                                    <div class="custom-title"><strong>Метки, присвоенные этой странице:</strong></div>
+                                    {% for tag in object.tags.all %}
+                                        <a href="/tags/{{tag.slug}}">{{tag.name}}</a>
+                                    {% endfor %}
+                                    
+             
+                                </div>
+
+                                <hr />
+                                {% endif %}
+
+                             
+                            </div>
+                            </div>
+{% include "comments.html" %}
+
+{% endblock maincontent %}
+
+{% block sidebar1 %}
+         {% for item in object.category.sidebar.all %}
+         {% include item.template %}
+       {% endfor %}
+{% endblock sidebar1 %}
+
+{% block sharejs2 %}
+
+    new Ya.share({
+        element: 'ya_share2',
+        theme: 'counter',
+            elementStyle: {
+                'type': 'button',
+                'border': true,
+                'quickServices':  [ 'facebook', 'twitter', 'vkontakte', 'gplus']},
+            title: '{% get title %}',
+            description: '{% get description %}',
+            popupStyle: {
+                blocks: {
+                    'Поделись-ка!': ['yaru', 'twitter', '', 'vkontakte'],
+                    'Поделись-ка по-другому!': ['yaru', 'twitter', 'vkontakte']
+                },
+                copyPasteField: true
+            },
+            serviceSpecific: {
+                twitter: {
+                    title: '#КонгрессИнтеллигенцииПротивВойны'
+               }
+        }
+});
+
+
+new Ya.share({
+        element: 'ya_share1',
+        theme: 'counter',
+            elementStyle: {
+                'type': 'button',
+                'border': true,
+                'quickServices':  [ 'facebook', 'twitter', 'vkontakte', 'gplus']},
+            title: '{% get title %}',
+            description: '{% get description %}',
+            popupStyle: {
+                blocks: {
+                    'Поделись-ка!': ['yaru', 'twitter', '', 'vkontakte'],
+                    'Поделись-ка по-другому!': ['yaru', 'twitter', 'vkontakte']
+                },
+                copyPasteField: true
+            },
+            serviceSpecific: {
+                twitter: {
+                    title: '#КонгрессИнтеллигенцииПротивВойны - {% block title %}{% endblock title %}'
+               }
+        }
+});
+
+{% endblock sharejs2 %}

@@ -1,0 +1,17 @@
+<div class="item-block col-lg-4 col-xs-12">
+                                    <div class="item-header">
+{% load comments %}
+                                    {% get_comment_count for item as comment_count %}
+                                    {% if comment_count %}
+                                        <a href="{{item.get_absolute_url}}#comments" class="item-comment"><span>{{comment_count}}</span><i></i></a>
+                                        {% endif %}
+                                        <a href="congress/themes/{{item.topic.slug}}" class="item-category">{{item.topic.title}}</a>
+                                        <a href="blog.html" class="item-date"><i class="fa fa-clock-o"></i>4h ago</a>
+                                        <a href="post.html" class="item-photo"><img src="{% with item.relatedphotos|first as ph %}{{ph.list_thumbnail.url}}{% endwith %}" alt=""></a>
+                                    </div>
+                                    <div class="item-content">
+                                        <h3><a href="{{item.get_absolute_url}}">{{item.title}}</a></h3>
+                                        <p>{{item.text|safe|truncatewords_html:"20"}}</p>
+          
+                                    </div>
+                                </div>

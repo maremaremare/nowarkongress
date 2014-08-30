@@ -1,0 +1,61 @@
+
+{% extends "leftsidebar.html" %}
+
+{% load customtags %}
+{% load fb_versions %}
+{% set title %}Заявление Конгресса "{{object.title}}" &ndash; все подписи{% endset %}
+{% set description %}Заявление Конгресса интеллигенции "{{object.title}}" &ndash; список подписавшихся {% endset %}
+
+
+{% block maincontent %}
+
+<h1><a href="{{object.text.get_absolute_url}}">Заявление Конгресса "{{object.title}}" &ndash; все подписи</a></h1>
+<div class="spacer-1" style="background:#BCBCBC;color:#BCBCBC;"></div>
+
+
+
+<div class="blog-style">
+{% for person in object.participants.all %}
+                 <div class="list-people-item">               
+     <div class="item-content list-mini-photo">
+                                    <a href="{{person.get_absolute_url}}" class="item-photo">
+
+                                        <img src="{{person.mini_thumbnail.url}}" class="imgperson" alt="">
+                                    </a>
+                                   
+
+                                </div>
+                              <h4><a href="{{person.get_absolute_url}}">{{person.name}}, <span class="lower">{{person.occupation}}</span></a>{% if not forloop.last %},{% endif %}
+                                
+                           </h4> 
+                              
+                         </div>
+                                
+{% endfor %}
+
+{% for person in object.outerparticipants.all %}
+  <div class="list-people-item">
+  <h4 style="margin-left:40px">{{person.name}}, <span class="lower">{{person.occupation}}</span></h4>{% if not forloop.last %},{% endif %}
+  </div>
+{% endfor %}
+                                
+    
+
+                            <!-- END .block-content -->
+                            </div>
+
+
+{% endblock maincontent %}
+
+{% block sidebar1 %}
+
+
+       {% for item in object.sidebar.all %}
+       {% if not item.for_detail_only %}
+          {% include item.template %}
+       {% endif %}
+        
+       {% endfor %}
+    
+{% endblock sidebar1 %}
+

@@ -1,0 +1,5 @@
+{% load url from future %}
+{% load fb_versions %}
+{% for user in users %}
+<a class="div choice" href="{% url 'people:detail' user.pk %}"><img class="searchicon" src="{% version user.photo 'micro_thumbnail' %}">{{ user.name }}</a>
+{% endfor %}

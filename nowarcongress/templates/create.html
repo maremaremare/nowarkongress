@@ -1,0 +1,30 @@
+{% extends "profilegeneral.html" %}
+
+
+{% block maincontent %}
+
+  {% load crispy_forms_tags %}
+<div class="strict-block">
+                            <div class="block-title">
+                                <h2>Новый материал</h2>
+                            </div>
+
+                            <!-- BEGIN .block-content -->
+                            <div class="block-content main-article">
+                            <form action="{{request.path}}"  enctype="multipart/form-data" method="post">{% csrf_token %}
+
+    {{ form|crispy }}
+   
+
+                     <h3> <input type="submit"  value="Сохранить" />  </h3>
+                            <!-- END .block-content -->
+                            </div>
+                        <!-- END .strict-block -->
+                        </div>
+
+
+
+{% endblock %}
+
+
+

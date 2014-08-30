@@ -1,0 +1,18 @@
+{% extends "leftsidebar.html" %}
+
+{% block maincontent %}
+
+    {% include "article.html" %}
+
+{% include "comments.html" %}
+
+{% endblock maincontent %}
+
+{% block sidebar1 %}
+    {% include "sidebar_socialize.html" %}
+    {% include "sidebar_actual.html" %}
+{% endblock sidebar1 %}
+
+{% block sidebar2 %}
+    {% include "sidebar_books.html" %}
+{% endblock sidebar2 %}

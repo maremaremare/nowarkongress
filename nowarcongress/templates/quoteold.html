@@ -1,0 +1,27 @@
+     {% load customtags %}
+   {% with quote|shuffle as quotes %}
+
+{% if quotes.0.full %}
+    
+
+   <div class="col-lg-12">
+   <div class="bqhp">
+
+      <div class="quotes"><a href="{{quotes.0.full.get_absolute_url}}">{{quotes.0.text|safe}}</a></div>
+     
+    </div>   
+   <a href="{{quotes.0.full.get_absolute_url}}"> <div class="quoteauthor">{{quotes.0.author_name}}</div>  </a> 
+</div>
+
+{% else %}
+   <div class="col-lg-12">
+   <div class="bqhp">
+
+      <div class="quotes">{{quotes.0.text|safe}}</div>
+     
+    </div>   
+    <div class="quoteauthor">{{quotes.0.author_name}}</div>   
+</div>
+
+{% endif %}
+{% endwith %}

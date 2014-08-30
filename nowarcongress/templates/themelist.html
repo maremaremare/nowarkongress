@@ -1,0 +1,58 @@
+
+{% extends "leftsidebar.html" %}
+{% block maincontent %}
+
+<h1>{{listtitle}}</h1>
+<div class="spacer-1" style="background:#BCBCBC;color:#BCBCBC;"></div>
+
+{% load comments %}
+
+<div class="blog-style">
+{% for item in object.streamitems.all %}
+                                
+                                     {% get_comment_count for item.stream_content_object as comment_count %}
+                                <div class="item {% if item.stream_content_object.relatedphotos|length %}image-small{% else %}image-no{% endif %}  ">
+                                {% if item.stream_content_object.relatedphotos|length %}
+                                    <div class="item-header">
+                                    
+                                    {% if comment_count %}
+                                        <a href="{{item.stream_content_object.get_absolute_url}}#comments" class="item-comment"><span>{{comment_count}}</span><i></i></a>
+                                        {% endif %}
+                                        <a href="{{item.stream_content_object.get_absolute_url}}" class="item-photo"><img src="{% with item.stream_content_object.relatedphotos|first as ph %}{{ph.list_thumbnail.url}}{% endwith %}" alt=""></a>
+                                    </div>
+                                    {% endif %}
+                                    <div class="item-content">
+                                        <h3><a href="{{item.stream_content_object.get_absolute_url}}">{{item.stream_content_object.title}}</a>{% if comment_count and not item.stream_content_object.relatedphotos|length %}
+                                            <a href="{{item.stream_content_object.get_absolute_url}}#comments" class="item-comment"><span>{{comment_count}}</span></a>
+                                        {% endif %}</h3>
+                                     <div class="item-icons">
+                                                    <a href="blog.html"><i class="fa fa-calendar"></i>{{item.date|date:"d E Y"}}</a>
+                                                    <a href="{{item.stream_content_object.get_category_absolute_url}}"><i class="fa fa-{{item.stream_content_object.get_icon}}"></i>{{item.stream_content_object.get_type}}</a>
+                                                    {% if item.stream_content_object.author %}
+                                                    <a href="{{item.stream_content_object.author.get_absolute_url}}"><i class="fa fa-user"></i>{{item.stream_content_object.author.name}}</a>
+                                                  {% endif %}
+                                                </div>
+                                  <div style="margin-bottom:10px">
+                                          {{item.stream_content_object.text|striptags|truncatechars:"400"}}</div>
+                                      <a href="{{item.stream_content_object.get_absolute_url}}" class="trans-button">Читать дальше</a>
+                                    </div>
+
+                                    <div class="clear-float"></div>
+
+                                </div>
+                                
+                              {% endfor %}
+                                
+    
+
+                            <!-- END .block-content -->
+                            </div>
+
+
+{% endblock maincontent %}
+
+{% block sidebar1 %}
+       
+    {% include "sidebar_actual.html" %}
+{% endblock sidebar1 %}
+

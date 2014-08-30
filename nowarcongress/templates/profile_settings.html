@@ -1,0 +1,64 @@
+ {% extends "profilegeneral.html" %}
+
+
+{% block maincontent %}
+
+  
+<div class="strict-block">
+                            <div class="block-title">
+                                <h2>Настройки входа</h2>
+                            </div>
+
+                            <!-- BEGIN .block-content -->
+                            <div class="block-content main-article">
+                           
+
+
+ {% if backends.associated %}
+  
+
+                                <div class="item">
+                      
+                                
+
+
+                                 <p>С вашей учетной записью связаны:</p>
+  {% for assoc in backends.associated %}
+  <div>
+    <strong>{{ assoc.provider }}</strong>
+    <form action="{% url 'social:disconnect_individual' assoc.provider assoc.id %}" method="post">{% csrf_token %}
+      <button class="btn btn-link">Отсоединить</button>
+    </form>
+  </div>
+  {% endfor %}
+
+  </div>
+  {% endif %}
+
+  {% if backends.not_associated|length %}
+
+      <div class="item">
+  <p>Привязать к учетной записи:</p>
+  <ul>
+    {% for name in backends.not_associated %}
+    {% if name != 'email' %}
+          <li>
+      <a href="{% url 'social:begin' name %}">{{ name }}</a>
+    </li>
+    {% endif %}
+
+    {% endfor %}
+  </ul>
+  </div>
+  {% endif %}
+
+                            </div>
+                           
+                            <!-- END .block-content -->
+                            </div>
+                        <!-- END .strict-block -->
+                        </div>
+
+{% endblock %}
+
+

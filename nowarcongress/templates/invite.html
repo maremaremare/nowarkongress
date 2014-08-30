@@ -1,0 +1,32 @@
+{% extends "profilegeneral.html" %}
+
+
+{% block maincontent %}
+
+  {% load crispy_forms_tags %}
+<div class="strict-block">
+                            <div class="block-title">
+                                <h2>Пригласить друга присоединиться к конгрессу</h2>
+                            </div>
+
+                            <!-- BEGIN .block-content -->
+                            <div class="block-content main-article">
+                            <form action=""  method="post">{% csrf_token %}
+
+    {{ form|crispy }}
+    <input type="submit" value="Пригласить" />
+
+              </form>      
+                            <!-- END .block-content -->
+                            </div>
+                        <!-- END .strict-block -->
+                        </div>
+
+
+                    
+                   
+                  
+                        <!-- END .strict-block -->
+                
+
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "django_messages/base.html" %} 
+{% load i18n %} 
+{% load url from future %}
+
+{% block maincontent %}
+<h1>{{ message.subject }}</h1>
+<div class="spacer-1" style="background:#BCBCBC;color:#BCBCBC;"></div>
+  
+ <a href="{{message.sender.get_absolute_url}}" class="author-photo"><img src="{{message.sender.micro_thumbnail.url}}" alt="">{{ message.sender.name }}</a>
+   
+  {{ message.sent_at|date:"d E Y H:i"}}
+<div class="spacer-1" style="background:#BCBCBC;color:#BCBCBC;"></div>
+
+{{ message.body|linebreaksbr }}<br /><br />
+<div class="tagcloud">
+{% ifequal message.recipient.pk user.profile.pk %}
+<a href="{% url 'messages_reply' message.id %}">{% trans "Reply" %}</a>
+{% endifequal %}
+<a href="{% url 'messages_delete' message.id %}">{% trans "Delete" %}</a>
+</div>
+{% endblock %}

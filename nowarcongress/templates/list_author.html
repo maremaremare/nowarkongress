@@ -1,0 +1,99 @@
+
+{% extends "leftsidebar.html" %}
+{% block maincontent %}
+{% load customtags %}
+{% set title %}Конгресс интеллигенции против войны: {{author.name}}. Все материалы автора. {% endset %}
+{% set description %}Конгресс интеллигенции против войны: {{author.name}}. Все материалы автора. {% endset %}
+<h1>{{author.name}}{% if author.occupation %}, {{author.occupation}}{% endif %}</h1>
+<div class="spacer-1" style="background:#BCBCBC;color:#BCBCBC;"></div>
+
+
+{% load comments %}
+{% load pagination_tags %}
+{% load fb_versions %}
+
+    {% autopaginate object_list 7 %}
+
+
+<div class="blog-style">
+{% for item in object_list %}
+
+
+
+
+
+
+
+                                
+                                     {% get_comment_count for item as comment_count %}
+                                <div class="item {% if item.photos.all|length %}image-small{% else %}image-no{% endif %}  ">
+                                {% if item.photos.all|length %}
+                                    <div class="item-header">
+                                    
+                                    {% if comment_count %}
+                                        <a href="{{item.get_absolute_url}}#comments" class="item-comment"><span>{{comment_count}}</span><i></i></a>
+                                        {% endif %}
+                                        <a href="{{item.get_absolute_url}}" class="item-photo">
+                                          
+
+                          {% with object.photos.all|first as ph %}
+                <img src="{% version ph.image 'list_thumbnail' %}" class="article-photo" alt="ph.title" />{% endwith %}
+          
+
+                                        </a>
+                                    </div>
+                                    {% endif %}
+                                    <div class="item-content">
+                                        <h3><a href="{{item.get_absolute_url}}">{{item.title}}</a>{% if comment_count and not item.photos.all|length %}
+                                            <a href="{{item.get_absolute_url}}#comments" class="item-comment"><span>{{comment_count}}</span></a>
+                                        {% endif %}</h3>
+                                     <div class="item-icons">
+                                             {% if item.topic %}
+                                                      <a href="{{item.topic.get_absolute_url}}">{{item.topic.title}}</a>
+                                                    {% endif %}
+                                                    <a href="{{item.get_absolute_url}}"><i class="fa fa-calendar"></i>{{item.date|date:"d E Y"}}</a>
+                                 
+                                          
+                                                        <a href="{{item.category.get_absolute_url}}"><i class="fa fa-{{item.category.icon}}"></i>{{item.category.title}}</a>
+                                                 
+                                  
+                                                  
+                                      
+                                                </div>
+                                  <div style="margin-bottom:10px">
+                                          {{item.text|striptags|no_dumb_chars|truncatechars:"500"}}</div>
+                                      <a href="{{item.get_absolute_url}}" class="trans-button">Читать дальше</a>
+                                      {% if item.author == user.profile %}
+                                        
+                                        <h4>
+
+                                        <a class="editbutton" href="{{item.get_absolute_url}}/delete/">удалить</a><a class="editbutton" href="{{item.get_absolute_url}}/update/">редактировать</a>
+                                       <a class="editbutton 
+                                       {% if item.get_moderation_status == 0 %}rejected{% elif item.get_moderation_status == 1 %}accepted{% else %}waiting{% endif %}"
+
+
+                                       > {{item.get_moderation_text}}</a></h4>
+                                      {% endif %}
+                                    </div>
+
+                                    <div class="clear-float"></div>
+
+                                </div>
+                                
+                              {% endfor %}
+                                
+    {% paginate %}
+
+                            <!-- END .block-content -->
+                            </div>
+
+
+{% endblock maincontent %}
+
+{% block sidebar1 %}
+
+   {% include "sidebar_actual.html" %}
+   {% include "sidebar_adv.html" %}
+    
+{% endblock sidebar1 %}
+

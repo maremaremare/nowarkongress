@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+    
+{% load customtags %}
+{% set title %}Конгресс интеллигенции против войны, самоизоляции России, реставрации тоталитаризма{% endset %}
+{% set description %}Публикации участников, блоги, аналитика, мероприятия, заявления.{% endset %}
+
+{% block content %}
+ <div class="content-main">
+ {% include "quote.html" %}
+    {% include "slider.html" %}
+    {% for section in section_list %}
+        
+
+<div class="strict-block col-lg-12">
+                            <div class="block-title">
+                                <h2>{{section.title}}</h2>
+                                
+                                    {% if section.content_object.get_absolute_url %}
+                                          <a href="{{section.content_object.get_absolute_url}}" class="panel-title-right">Смотреть все</a>
+                                    {% endif %}
+                                
+                              
+                            </div>
+                            <!-- BEGIN .block-content -->
+                            <div class="block-content item-block-1 split-stuff  ">
+                            
+                                {% if section.content_type.id == 46 %}
+
+                            
+                                       {% for item in section.itms|slice:"3" %}
+                                   {% include item.category.item_template %}
+                                {% endfor %}
+
+                                {% else %}
+
+                                {% for item in section.itms|slice:"3" %}
+                                   {% include "item_topic.html" %}
+                                {% endfor %}
+
+
+                                {% endif %}
+
+                             
+                             
+                     
+                                </div>
+
+                            <!-- END .block-content -->
+                            </div>
+                        <!-- END .strict-block -->
+                      
+
+
+
+
+
+
+
+    {% endfor %}
+</div>
+{% endblock content %}
+
+{% block customjs %}
+    <script type="text/javascript">
+$(function() {
+
+
+    $('.banner').unslider({  speed: 500,               //  The speed to animate each slide (in milliseconds)
+    delay: 5000,              //  The delay between slide animations (in milliseconds)
+    complete: function() {},  //  A function that gets called after every slide animation
+    keys: true,               //  Enable keyboard (left, right) arrow shortcuts
+    dots: true,               //  Display dot navigation
+    fluid: true  
+});
+});
+    </script>
+{% endblock customjs %}

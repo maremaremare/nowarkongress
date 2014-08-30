@@ -1,0 +1,23 @@
+<div class="item-block col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                                    <div class="item-header">
+                                        {% load comments %}
+                                        {% load fb_versions customtags %}
+                                    {% get_comment_count for item as comment_count %}
+                                    {% if comment_count %}
+                                        <a href="{{item.get_absolute_url}}#comments" class="item-comment"><span>{{comment_count}}</span><i></i></a>
+                                        {% endif %}
+                                    </div>
+                                    <div class="item-content">
+                                       
+                                        <div class="header-content header-long">
+                                         <h3><a href="{{item.get_absolute_url}}">{{item.title}}</a></h3>
+                                        {% if item.topic %}
+                                                  <a href="{{item.topic.get_absolute_url}}" class="item-category">{{item.topic}}</a> <br> 
+                                        {% endif %}
+                                    
+                                            <a href="blog.html" class="item-date"><i class="fa fa-clock-o"></i>{{item.date|date:"d E Y"}}</a>
+                                        </div>
+                                        <p>{{item.text|striptags|no_dumb_chars|truncatewords_html:"30"}}</p>
+ 
+                                    </div>
+                                </div>

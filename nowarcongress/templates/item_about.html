@@ -1,0 +1,19 @@
+<div class="item-block col-lg-4 col-md-6 col-sm-12 col-xs-12 item-block-with-pic">
+                                    <div class="item-header">
+{% load comments %}
+{% load customtags %}
+                                    {% get_comment_count for item as comment_count %}
+                                    {% if comment_count %}
+                                        <a href="{{item.get_absolute_url}}#comments" class="item-comment"><span>{{comment_count}}</span><i></i></a>
+                                        {% endif %}
+                                   
+                                 
+                                     <a href="{{item.get_absolute_url}}" class="item-date"><i class="fa fa-clock-o"></i>{{item.date|date:"d E Y"}}</a>
+                                        <a href="{{item.get_absolute_url}}" class="item-photo"><img src="{{item.author.photo.url}}" alt=""></a>
+                                    </div>
+                                    <div class="item-content">
+                                        <h3><a href="{{item.get_absolute_url}}">{{item.author.name}}</a></h3>
+                                        <p>{{item.text|striptags|no_dumb_chars|truncatewords_html:"20"}}</p>
+          
+                                    </div>
+                                </div>

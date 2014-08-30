@@ -1,0 +1,33 @@
+{% for item in items %}
+
+
+<div class="item-block 
+        
+       {% if items.count = 2 %}
+       col-lg-6
+       {% elif items.count = 1 %}
+       col-lg-12
+       {% else %}
+       col-lg-3
+    {% endif %}">
+    <div class="item-header">
+       {% load comments %}
+                                    {% get_comment_count for item as comment_count %}
+                                    {% if comment_count %}
+                                        <a href="{{item.get_absolute_url}}#comments" class="item-comment"><span>{{comment_count}}</span><i></i></a>
+                                        {% endif %}
+    </div>
+    <div class="item-content">
+        <h3><a href="{{item.get_absolute_url}}">{{item.title}}</a>
+        </h3>
+        <div class="header-content">
+
+
+
+
+            <a href="#" class="item-date"><i class="fa fa-clock-o"></i>{{item.date|date:"d F Y"}}</a>
+        </div>
+        <p>{{item.text|safe|truncatewords_html:"15"}}</p>
+    </div>
+</div>
+{% endfor %}

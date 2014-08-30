@@ -1,0 +1,44 @@
+{% if sidebar_petitions %}
+    {% load customtags %}
+
+<div class="widget">
+                            <h3>Заявления Конгресса</h3>
+                
+                            <div class="w-news-list">
+                     
+
+                          
+                
+                                {% for item in sidebar_petitions %}
+                           
+                          
+                                                                    <!-- BEGIN .item -->
+                                <div class="item">
+                              
+                                        <h4><a href="{{item.get_absolute_url}}">{{item.title}}</a></h4>
+                                        <p>{{item.text|striptags|no_dumb_chars|truncatewords_html:"15"}}</p>
+                                        <div class="item-foot">
+                                            <a href="{{item.item.get_absolute_url}}"></i><b>Читать полностью</b></a>
+                                             {% if item.rep_event.all|length %}
+                                            <a href="{{item.item.get_absolute_url}}"><i class="fa fa-clock-o"></i>
+                                            {% with item.rep_event.all|first as event %}
+                                                {{event.date|date:"d E"}}</a>
+                                            {% endwith %}
+
+                                            
+                                            {% endif %}   
+                     
+                                        </div>
+                                    
+                                <!-- END .item -->
+                                </div>
+                                {% endfor %}
+
+                                
+                              
+
+                            </div>
+                        <!-- END .widget -->
+                        </div>
+
+                        {% endif %}

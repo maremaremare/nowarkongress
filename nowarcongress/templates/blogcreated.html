@@ -1,0 +1,42 @@
+{% extends "profilegeneral.html" %}
+
+
+{% block maincontent %}
+
+  {% load crispy_forms_tags %}
+<div class="strict-block col-lg-12">
+                            <div class="block-title">
+                                <h2>Новая запись в блоге</h2>
+                            </div>
+
+                            <!-- BEGIN .block-content -->
+                            <div class="block-content main-article">
+                            <p>Большое спасибо! Ваша запись будет опубликована на сайте после одобрения модератора. Благодарим за терпение.</p>
+                    
+                            <!-- END .block-content -->
+                            </div>
+                        <!-- END .strict-block -->
+                        </div>
+
+
+
+
+{% if object.blogposts.all|length %}
+
+    <div class="strict-block col-lg-12">
+                            <div class="block-title">
+                                <h2>Ваши последние записи</h2>
+                                
+                            </div>
+                            <!-- BEGIN .block-content -->
+                            <div class="block-content main-article col-lg-12">
+                               
+                            {% with object.blogposts.all|slice:":3" as items %}
+                                {% include "profile_items.html" %}
+                            {% endwith %}
+                            </div>
+                        <!-- END .strict-block -->
+                        </div>
+{% endif %}                        
+
+{% endblock %}

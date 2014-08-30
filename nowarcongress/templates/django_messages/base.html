@@ -1,0 +1,35 @@
+{% extends "leftsidebar.html" %}
+{% load i18n %}
+{% load url from future %} 
+{% block bodyclass %}about{% endblock %}
+{% block maincontent %}  
+{% endblock %}
+{% block sidebar1 %}
+
+<div class="widget">
+<h3>Сообщения</h3>
+<div class="middle-articles">
+
+    <div class="item"><a href="{% url 'messages_inbox' %} ">{% trans "Inbox" %}</a></div>
+    <div class="item"><a href="{% url 'messages_outbox' %} ">{% trans "Sent Messages" %}</a></div>
+    <div class="item"><a href="{% url 'messages_compose' %} ">{% trans "New Message" %}</a></div>
+    <div class="item"><a href="{% url 'messages_trash' %} ">{% trans "Trash" %}</a></div>
+</div></div>
+
+<div class="widget">
+                            
+<h3>Профиль</h3>
+                            <div class="middle-articles">
+                            <div class="item"><a href="/profile/update/">Редактировать профиль</a></div>
+                            <div class="item"><a href="/profile/create/">Новая запись в блоге</a></div>
+                            <div class="item"><a href="/profile/settings/">Настройки</a></div>
+
+                            </div>
+
+
+{% endblock %}
+{% load customtags %}
+{% set title %}Конгресс интеллигенции против войны: личные сообщения{% endset %}
+{% set description %}Личные сообщения{% endset %}
+
+

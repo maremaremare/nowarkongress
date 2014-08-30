@@ -1,0 +1,40 @@
+
+ {% load customtags fb_versions %}   
+
+<div class="widget">
+                            <h3>Главное</h3>
+                
+                            <div class="w-news-list">
+                     
+
+                           
+                
+                                {% for slitem in actualsidebar %}
+                           
+                          
+                                                                    <!-- BEGIN .item -->
+                                <div class="item">
+                              
+                                      
+                              
+                                    
+                                      <a href="{{slitem.item.get_absolute_url}}"><img src="{% version slitem.image 'sidebar_thumbnail' %}" class="sidebarimg" alt=""></a>
+                                        <h4><a href="{{slitem.item.get_absolute_url}}">{{slitem.item.title}}</a></h4>
+                                        <p>{{slitem.item.text|striptags|no_dumb_chars|truncatewords_html:"15"}}</p>
+                                        <div class="item-foot">
+                                            <a href="{{slitem.item.get_absolute_url}}"></i><b>Читать дальше</b></a>
+                                            <a href="{{slitem.item.get_absolute_url}}"><i class="fa fa-clock-o"></i>{{slitem.item.date|date:"d E"}}</a>
+                                            <a href="{{slitem.item.category.get_absolute_url}}"><i class="fa fa-{{slitem.item.category.icon}}"></i>{{slitem.item.category.title}}</a>
+                                        </div>
+                                    
+                                <!-- END .item -->
+                                </div>
+                                {% endfor %}
+
+                                
+                              
+
+                            </div>
+                        <!-- END .widget -->
+                        </div>
+              

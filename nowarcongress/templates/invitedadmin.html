@@ -1,0 +1,17 @@
+{% extends "admin/base.html" %}
+
+
+{% block content %}
+
+  {% load crispy_forms_tags %}
+  
+<fieldset class="grp-module">
+
+<div style="padding:30px">
+<p>Приглашение успешно отправлено.</p>
+<a href="/siteadmin/admin/person/invite/">Отправить еще одно</a>
+
+</div>
+</fieldset>
+
+{% endblock %}

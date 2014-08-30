@@ -1,0 +1,67 @@
+{% with object.petition as petition %}
+
+  <div class="strict-block">
+    <div class="block-title">
+      <h2>Подписи</h2>
+      
+    </div>
+    <!-- BEGIN .block-content -->
+    
+    <div class="block-content">
+      <span>
+      {% if petition.outerparticipants.all|length %}
+        Заявление подписали {{ petition.outerparticipants.all|length}} человек{{petition.people_form}}
+      {% endif %}
+      </span>
+      {% if petition.outerparticipants.all|length %}
+         <hr>
+   
+      {% for person in petition.outerparticipants.all|slice:":5" %}
+        <div class="list-people-item">
+ 
+          <h5><strong>{{person.first_name}} {{person.second_name}}</strong>{% if person.occupation %}
+            , <span class="lower">{{person.occupation}}</span>{% if person.city %} ({{person.city}})
+            {% endif %}
+          {% endif %}{% if not forloop.last %},{% endif %}
+          
+          </h5>
+          
+        </div>
+        
+      {% endfor %}
+      {% endif %}
+     
+      
+    
+      {% if object.petition.get_number %}
+        <hr>
+        <span><a href="{{petition.get_absolute_url}}">Смотреть весь список подписавших ({{petition.get_number}})</a></span>
+      {% endif %}
+      
+      {% if object.petition.closed %}
+        <span>Сбор подписей закрыт</span>
+      {% else %}
+      <hr>
+
+           {% if user.is_authenticated %}
+                        {% if user.profile in object.petition.participants.all %}
+                           <span >Вы уже подписали это заявление</span>
+                        {% else %}
+                             <a href="/petition/{{object.petition.id}}/addme/" class="button" style="line-height:42px">Подписать</a>
+                        {% endif %}
+                        {% else %}
+
+                           {% if object.petition.id in request.session.signed_petitions %}
+                                <span >Вы уже подписали это заявление</span>
+                           {% else %}
+                           <a href="/petition/{{object.petition.id}}/addouter/" class="button ajax-popup-link"  style="line-height:42px">Подписать</a>
+                           {% endif %}
+                        {% endif %}
+
+      {% endif %}
+             
+                       
+  </div>
+  
+</div>
+{% endwith %}

@@ -1,0 +1,59 @@
+
+
+
+
+
+{% extends "leftsidebar.html" %}
+{% block maincontent %}
+
+<h1>{{listtitle}}</h1>
+<div class="spacer-1" style="background:#BCBCBC;color:#BCBCBC;"></div>
+
+{% load comments %}
+
+<div class="blog-style">
+{% for item in object_list %}
+                                
+                                     {% get_comment_count for item as comment_count %}
+                                <div class="item {% if item.relatedphotos|length %}image-small{% else %}image-no{% endif %}  ">
+                                {% if item.relatedphotos|length %}
+                                    <div class="item-header">
+                                    
+                                    {% if comment_count %}
+                                        <a href="{{item.get_absolute_url}}#comments" class="item-comment"><span>{{comment_count}}</span><i></i></a>
+                                        {% endif %}
+                                        <a href="{{item.get_absolute_url}}" class="item-photo"><img src="{% with object.relatedphotos|first as ph %}{{ph.slmax_thumbnail.url}}{% endwith %}" alt=""></a>
+                                    </div>
+                                    {% endif %}
+                                    <div class="item-content">
+                                        <h3><a href="{{item.get_absolute_url}}">{{item.title}}</a>{% if comment_count and not item.relatedphotos|length %}
+                                            <a href="{{item.get_absolute_url}}#comments" class="item-comment"><span>{{comment_count}}</span></a>
+                                        {% endif %}</h3>
+                                     <div class="item-icons">
+                                                    <a href="blog.html"><i class="fa fa-calendar"></i>{{item.date|date:"d E Y"}}</a>
+                                                  {% if item.author %}
+                                                    <a href="{{item.author.get_absolute_url}}"><i class="fa fa-user"></i>{{item.author.name}}</a>
+                                                  {% endif %}
+                                                </div>
+                                  
+                                          {{item.text|safe|truncatewords_html:"100"}}
+                                        <a href="{{item.get_absolute_url}}" class="trans-button">Читать дальше</a>
+                                    </div>
+                                    <div class="clear-float"></div>
+                                </div>
+                                
+                              {% endfor %}
+                                
+    
+
+                            <!-- END .block-content -->
+                            </div>
+
+
+{% endblock maincontent %}
+
+{% block sidebar1 %}
+       
+    {% include "sidebar_actual.html" %}
+{% endblock sidebar1 %}
+

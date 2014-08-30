@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+      {% load crispy_forms_tags %}
+
+<div class="strict-block col-lg-12">
+                            <div class="block-title">
+                                <h2>Вход</h2>
+                            </div>
+
+                            <!-- BEGIN .block-content -->
+                            <div class="block-content main-article">
+                            <form action="/complete/email/?next={{ request.GET.next }}"   method="post">{% csrf_token %}
+
+    {{ form|crispy }}
+    <h3><input type="submit" value="Войти"/></h3><br><br>
+<a href="{% url 'password_reset' %}">Забыли пароль?</a><br>
+<a href="/login/google-oauth2/?next={{ request.GET.next }}">Войти через Google</a><br>
+<a href="/login/facebook/?next={{ request.GET.next }}">Войти через Facebook</a><br>
+<a href="/howtoregister/">Как стать членом Конгресса?</a>
+                
+                            <!-- END .block-content -->
+                            </div>
+                        <!-- END .strict-block -->
+                        </div>
+
+
+
+{% endblock content %}
+
+{% load customtags %}
+{% set title %}Конгресс интеллигенции против войны: вход{% endset %}
+{% set description %}Регистрация{% endset %}

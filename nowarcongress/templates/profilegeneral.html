@@ -1,0 +1,93 @@
+{% extends "leftsidebar.html" %}
+{% load url from future %}
+{% load customtags %}
+{% set title %}Конгресс интеллигенции против войны: профиль {% endset %}
+{% set description %} Внутренний раздел сайта только для участников конгресса {% endset %}
+{% block sidebar1 %}
+  {% if user.is_authenticated %}
+  
+
+<div class="widget">
+                            
+
+                            <div class="middle-articles">
+                            <div class="item"><a href="/profile/">Мой профиль</a></div>
+                            <div class="item"><a href="/profile/update/">Редактировать профиль</a></div>
+                            <div class="item"><a href="/profile/create/">Новый материал на сайт</a></div>
+                            <div class="item"><a href="/profile/messages/">Сообщения</a></div>
+                            {% if user.profile.can_invite %}
+                              <div class="item"><a href="/profile/invite/">Выслать приглашение</a></div>
+                            {% endif %}
+                            <div class="item"><a href="/profile/settings/">Настройки</a></div>
+                           
+                        </div>
+
+</div>
+
+ 
+  {% else %}
+  
+  <div> Вы не авторизированы. </div>
+  
+  {% endif %}
+{% endblock sidebar1 %}
+
+{% if user.is_authenticated %}
+  
+{% block maincontent %}
+
+{% endblock %}
+
+ {% endif %}
+
+ {% block customjs %}
+ {% include 'autocomplete_light/static.html' %}
+<script type="text/javascript">
+ function cloneMore(selector, type) {
+    var newElement = $(selector).clone(true);
+    var total = $('#id_' + type + '-TOTAL_FORMS').val();
+    newElement.find('[id^=div_id]').each(function() {
+        var id = $(this).attr('id').replace('-' + (total-1) + '-','-' + total + '-');
+        $(this).attr({'id': id});
+    });
+    newElement.find(':input').each(function() {
+        var name = $(this).attr('name').replace('-' + (total-1) + '-','-' + total + '-');
+        var id = 'id_' + name;
+        $(this).attr({'name': name, 'id': id}).val('').removeAttr('checked');
+    });
+    newElement.find('label').each(function() {
+        var newFor = $(this).attr('for').replace('-' + (total-1) + '-','-' + total + '-');
+        $(this).attr('for', newFor);
+    });
+    total++;
+    $('#id_' + type + '-TOTAL_FORMS').val(total);
+    $(selector).after(newElement);
+}
+
+
+
+$( document ).ready(function() {
+  $('#add_more').click(function() {
+    console.log('a')
+        cloneMore('div.multiField:last', 'photos');
+    });
+});
+   
+
+</script>
+<script type="text/javascript" src="//tinymce.cachefly.net/4.0/tinymce.min.js"></script>
+
+<script type="text/javascript">
+    tinyMCE.init({selector:'textarea',   toolbar: "undo redo | styleselect | bold italic | link image | lorumipsum lorumipsumru",
+        plugins: "link",
+        language : 'ru_RU',
+        language_url : '{{ STATIC_URL }}jscript/ru.js',
+        style_formats : [
+        {title : 'Bold text', inline : 'b'},
+        {title : 'Red text', inline : 'span', styles : {color : '#ff0000'}},
+        {title : 'Red header', block : 'h1', styles : {color : '#ff0000'}},
+        {title : 'Table styles'},
+        {title : 'Table row 1', selector : 'tr', classes : 'tablerow1'}
+    ]});
+</script>
+ {% endblock customjs %}

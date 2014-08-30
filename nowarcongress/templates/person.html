@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% load customtags fb_versions %}
+{% set title %}Конгресс интеллигенции против войны: {{object.name}} {% endset %}
+{% set description %} Участник конгресса интеллигенции {{object.name}} {% endset %}
+<div class="col-lg-12"><h1 class="person-h1">{{object.name}}{% if object.occupation %}, {{object.occupation|lower}}{% endif %}</h1>
+</div>
+<div class="strict-block col-lg-12">
+
+                            <div class="block-title">
+                                <h2>О себе</h2>
+                            </div>
+                            <!-- BEGIN .block-content -->
+                            <div class="block-content main-article col-lg-12">
+                                <div class="item-content col-lg-3">
+                                    
+
+                                        <img src="{% version object.photo 'plist_thumbnail' %}" class="imgperson" alt="{{object.name}}">
+                                   
+                                   
+
+                                </div>
+                              {{object.about|safe}}
+
+                            <!-- END .block-content -->
+                            </div>
+                        <!-- END .strict-block -->
+                        </div>
+{% if user.is_authenticated %}
+{% if object.city or object.twitter or object.facebook or object.site %}
+    
+
+    <div class="strict-block col-lg-12">
+
+                            <div class="block-title">
+                                <h2>Контакты</h2>
+                            </div>
+                            <!-- BEGIN .block-content -->
+                            <div class="block-content main-article col-lg-12">
+                             <ul>
+                             {% if object.city %}
+                                 <li><i class="fa fa-home"></i> {{object.city}}</li>
+                             {% endif %}
+
+                             {% if object.facebook %}
+                                 <li><a href="{{object.facebook}}"><i class="fa fa-facebook"></i> {{object.facebook}}</a></li>
+                             {% endif %}
+
+
+                             {% if object.twitter %}
+                                 <li><a href="{{object.twitter}}"><i class="fa fa-twitter"></i> {{object.twitter}}</a></li>
+                             {% endif %}
+                             
+
+                             {% if object.site %}
+                                 <li><a href="{{object.site}}"><i class="fa fa-link"></i> {{object.site}}</a></li>
+                             {% endif %}
+                             
+                             </ul>
+
+                            <!-- END .block-content -->
+                            </div>
+                        <!-- END .strict-block -->
+                        </div>
+                        {% endif %}
+{% endif %}
+
+
+
+
+{% if object.items.all|length %}
+
+<div class="strict-block col-lg-12">
+ <div class="block-title">
+<h2>Последние материалы</h2>  
+<a href="/people/{{object.id}}/all/" class="panel-title-right">Смотреть все</a>                              
+</div>
+<div class="block-content item-block-1 split-stuff">
+{% for item in object.items.all|slice:"5" %}
+
+<div class="item-profile-author col-lg-12">
+                              
+                                      {% load customtags %}
+                                        <h4><a href="{{item.get_absolute_url}}">{{item.title}}</a></h4>
+                                            <div class="item-foot">
+                                            
+                                            <a href="{{item.get_absolute_url}}"><i class="fa fa-clock-o"></i>12 июня</a>
+                                            <a href="{{item.category.get_absolute_url}}"><i class="fa fa-{{item.category.icon}}"></i>{{item.category.title}}</a>
+                                        </div>
+                                        <p>{{item.text|striptags|no_dumb_chars|truncatewords_html:"250"}}</p>
+                                    
+                                    
+                                <!-- END .item -->
+                                </div>
+
+{% endfor %}
+    
+</div>
+ </div>   
+{% endif %}
+
+
+{% if petitions|length %}
+    <div class="strict-block col-lg-12">
+                            <div class="block-title">
+                                <h2>Подписанные заявления Конресса</h2>
+                                
+                            </div>
+                            <!-- BEGIN .block-content -->
+                            <div class="block-content item-block-1 split-stuff ">
+                               
+                            <!-- END .block-content -->
+                            </div>
+                        <!-- END .strict-block -->
+                        </div>
+{% endif %}
+
+
+                        
+{% endblock content %}

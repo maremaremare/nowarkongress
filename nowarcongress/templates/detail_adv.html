@@ -1,0 +1,66 @@
+{% extends "leftsidebar.html" %}
+
+{% block maincontent %}
+
+    {% include "detail_adv_article.html" %}
+
+{% include "comments.html" %}
+
+{% endblock maincontent %}
+
+{% block sidebar1 %}
+         {% for item in object.category.sidebar.all %}
+         {% include item.template %}
+       {% endfor %}
+{% endblock sidebar1 %}
+
+{% block sharejs2 %}
+
+    new Ya.share({
+        element: 'ya_share2',
+        theme: 'counter',
+            elementStyle: {
+                'type': 'button',
+                'border': true,
+                'quickServices':  [ 'facebook', 'twitter', 'vkontakte', 'gplus']},
+            title: '{% get title %}',
+            description: '{% get description %}',
+            popupStyle: {
+                blocks: {
+                    'Поделись-ка!': ['yaru', 'twitter', '', 'vkontakte'],
+                    'Поделись-ка по-другому!': ['yaru', 'twitter', 'vkontakte']
+                },
+                copyPasteField: true
+            },
+            serviceSpecific: {
+                twitter: {
+                    title: '#КонгрессИнтеллигенцииПротивВойны'
+               }
+        }
+});
+
+
+new Ya.share({
+        element: 'ya_share1',
+        theme: 'counter',
+            elementStyle: {
+                'type': 'button',
+                'border': true,
+                'quickServices':  [ 'facebook', 'twitter', 'vkontakte', 'gplus']},
+            title: '{% get title %}',
+            description: '{% get description %}',
+            popupStyle: {
+                blocks: {
+                    'Поделись-ка!': ['yaru', 'twitter', '', 'vkontakte'],
+                    'Поделись-ка по-другому!': ['yaru', 'twitter', 'vkontakte']
+                },
+                copyPasteField: true
+            },
+            serviceSpecific: {
+                twitter: {
+                    title: '#КонгрессИнтеллигенцииПротивВойны - {% block title %}{% endblock title %}'
+               }
+        }
+});
+
+{% endblock sharejs2 %}

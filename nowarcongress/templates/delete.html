@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+  {% load crispy_forms_tags %}
+<div class="strict-block col-lg-12">
+                            <div class="block-title">
+                                <h2>Удаление материала</h2>
+                            </div>
+
+                            <!-- BEGIN .block-content -->
+                            <div class="block-content main-article">
+                            
+                     
+                    <form action="" method="post">{% csrf_token %}
+    <p>Вы действительно хотите удалить "{{ object }}"?</p>
+    <input type="submit" value="Да, удалить" />
+</form>
+                            <!-- END .block-content -->
+                            </div>
+                        <!-- END .strict-block -->
+                        </div>
+
+                      
+
+{% endblock %}
+
+{% load customtags %}
+{% set title %}Конгресс интеллигенции против войны: удалить материал{% endset %}
+{% set description %}Удаление материала{% endset %}

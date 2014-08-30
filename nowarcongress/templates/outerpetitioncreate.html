@@ -1,0 +1,21 @@
+
+
+  {% load crispy_forms_tags %}
+
+<div class="strict-block col-lg-6 popup">
+                            <div class="block-title">
+                                <h2>Подписать заявление</h2>
+                            </div>
+
+                            <!-- BEGIN .block-content -->
+                            <div class="block-content main-article">
+                            <form action="{{request.path}}" method="post">{% csrf_token %}
+
+    {{ form|crispy }}
+    <input type="submit" value="Подписать" />
+
+                    
+                            <!-- END .block-content -->
+                            </div>
+                        <!-- END .strict-block -->
+                        </div>

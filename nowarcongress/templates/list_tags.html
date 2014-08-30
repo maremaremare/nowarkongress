@@ -1,0 +1,60 @@
+{% extends "leftsidebar.html" %}
+{% block maincontent %}
+{% load customtags %}
+{% load fb_versions %}
+{% set title %}Конгресс интеллигенции против войны: {{listtitle}} {% endset %}
+{% set description %}Все материалы сайта c меткой «{{listtitle}}» {% endset %}
+<h1>{{listtitle}}</h1>
+<div class="spacer-1" style="background:#BCBCBC;color:#BCBCBC;"></div>
+
+{% load comments %}
+
+<div class="blog-style">
+{% for item in object_list %}
+                                
+                                      {% get_comment_count for item.content_object as comment_count %}
+                                <div class="item {% if item.content_object.relatedphotos|length %}image-small{% else %}image-no{% endif %}  ">
+                                {% if item.content_object.relatedphotos|length %}
+                                    <div class="item-header">
+                                    
+                                    {% if comment_count %}
+                                        <a href="{{item.content_object.get_absolute_url}}#comments" class="item-comment"><span>{{comment_count}}</span><i></i></a>
+                                        {% endif %}
+                                        <a href="{{item.content_object.get_absolute_url}}" class="item-photo"><img src="{% with item.photos.all|first as ph %}{% version ph.image 'list_thumbnail' %}{% endwith %}" alt=""></a>
+                                    </div>
+                                    {% endif %}
+                                    <div class="item-content">
+                                        <h3><a href="{{item.content_object.get_absolute_url}}">{{item.content_object.title}}</a>{% if comment_count and not item.content_object.relatedphotos|length %}
+                                            <a href="{{item.content_object.get_absolute_url}}#comments" class="item-comment"><span>{{comment_count}}</span></a>
+                                        {% endif %}</h3>
+                                     <div class="item-icons">
+                                                    <a href="blog.html"><i class="fa fa-calendar"></i>{{item.content_object.date|date:"d E Y"}}</a>
+                                                    <a href="{{item.content_object.get_category_absolute_url}}"><i class="fa fa-{{item.content_object.get_icon}}"></i>{{item.content_object.get_type}}</a>
+                                                    {% if item.content_object.author and item.author.id != 7 %}
+                                                    <a href="{{item.content_object.author.get_absolute_url}}"><i class="fa fa-user"></i>{{item.content_object.author.name}}</a>
+                                                  {% endif %}
+                                                </div>
+                                  <div style="margin-bottom:10px">
+                                          {{item.content_object.text|striptags|no_dumb_chars|truncatechars:"400"}}</div>
+                                      <a href="{{item.content_object.get_absolute_url}}" class="trans-button">Читать дальше</a>
+                                    </div>
+
+                                    <div class="clear-float"></div>
+
+                                </div>
+                                
+                              {% endfor %}
+                                
+    
+
+                            <!-- END .block-content -->
+                            </div>
+
+
+{% endblock maincontent %}
+
+{% block sidebar1 %}
+       
+    {% include "sidebar_actual.html" %}
+{% endblock sidebar1 %}
+

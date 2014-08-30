@@ -1,0 +1,43 @@
+<div class="item-block col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                                    <div class="item-header">
+                                       
+                                        <a href="{{item.get_absolute_url}}" class="item-comment"><span>
+                                        {% if item.petition.get_number %}
+                                          {{item.petition.get_number}}
+                                          {% else %}
+                                          0
+                                        {% endif %}
+                                        
+                                            
+                                         подписали</span><i></i></a>
+                                      
+                                    </div>
+                                    <div class="item-content">
+                                        
+                                        <div class="header-content">
+                                        <h3><a href="{{item.get_absolute_url}}">{{item.title}}</a></h3>
+                                        {% if item.topic %}
+                                                  <a href="{{item.topic.get_absolute_url}}" class="item-category">{{item.topic}}</a> <br> 
+                                        {% endif %}
+                                    
+                                     
+                                        </div>
+                                        {% load customtags %}
+                                        <p class="pheight">{{item.text|striptags|no_dumb_chars|truncatechars:"300"}}</p>
+                            
+
+                               <div class="item-footer">
+
+ {% if user.is_authenticated and user.profile in item.petition.participants.all %}
+                           Вы уже подписали это заявление
+                        {% elif petition.id in request.session.signed_petitions %}
+                              Вы уже подписали это заявление
+                        {% else %}
+                              <a href="{{item.get_absolute_url}}" class="item-button">Подписать заявление</a>
+                           {% endif %}
+                                        
+                                        </div>
+                                
+                                    </div>
+                                               
+                                </div>

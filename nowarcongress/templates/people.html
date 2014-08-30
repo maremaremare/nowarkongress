@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block content %}
+{% load customtags crispy_forms_tags fb_versions %}
+<div class="strict-block col-lg-12">
+<h1>{{listtitle}}</h1>
+
+<input type="text" name="q" id="navigation_autocomplete" class="form-control" placeholder="Начните вводить имя человека" style="font-size: 16px; margin-bottom:20px" />
+
+
+{% for person in object_list %}
+    
+{% if not person.active and person.id != 7 %}
+                               <!-- BEGIN .block-content -->
+                            <div class="block-content block-content-blue main-article" width="100">
+                                <div class="item-content list-photo">
+                                    <a href="{{person.get_absolute_url}}" >
+
+                                        <img src="{% version person.photo 'plist_thumbnail' %}" class="imgperson" alt="">
+                                    </a>
+                                   
+
+                                </div>
+                             <a href="{{person.get_absolute_url}}"> <h1 class="article-h1">{{person.name}}{% if person.occupation %},{% endif %} {{person.occupation|lower}}</h1></a> 
+                             <span class="peoplelist">{% if person.initial %}<a href="/people/initiators/">Инициатор</a>
+                                 
+                             {% endif %} </span> {% if person.items.all|length %}<span class="peoplelist">              Материалов на сайте опубликовано: {{person.items.all|moderated|length}}{% endif %}</span>
+                             
+
+
+                            <!-- END .block-content -->
+                            </div>
+                        <!-- END .strict-block -->
+{% endif %}
+
+                    
+ 
+                        
+
+                        {% endfor %}
+                     
+                        </div>
+{% endblock content %}
+
+
+{% set title %}Конгресс интеллигенции против войны: участники конгресса {% endset %}
+{% set description %}Конгресс интеллигенции против войны. Список участников.{% endset %}
+
+
+
+ {% block customjs %}
+ {% include 'autocomplete_light/static.html' %}
+ {% load url from future %}
+
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#navigation_autocomplete').yourlabsAutocomplete({
+        url: '{% url 'people:navigation_autocomplete' %}',
+        choiceSelector: 'a',
+        placeholder: 'Начните вводить имя человека',
+    }).input.bind('selectChoice', function(e, choice, autocomplete) {
+        document.location.href = choice.attr('href');
+    });
+});
+</script>
+ {% endblock %}

@@ -1,0 +1,16 @@
+{% extends "leftsidebar.html" %}
+
+{% block maincontent %}
+
+    {% include "article.html" %}
+
+{% include "comments.html" %}
+
+{% endblock maincontent %}
+
+{% block sidebar1 %}
+         {% for item in object.category.sidebar.all %}
+         {% include item.template %}
+       {% endfor %}
+{% endblock sidebar1 %}
+
