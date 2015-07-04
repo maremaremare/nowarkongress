@@ -2,8 +2,8 @@
                                     <div class="item-header">
                                        
                                         <a href="{{item.get_absolute_url}}" class="item-comment"><span>
-                                        {% if item.petition.get_number %}
-                                          {{item.petition.get_number}}
+                                        {% if item.petition.shown_count %}
+                                          {{item.petition.shown_count}}
                                           {% else %}
                                           0
                                         {% endif %}

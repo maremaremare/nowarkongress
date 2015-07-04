@@ -4,7 +4,7 @@
     
 {% load customtags %}
 {% load fb_versions %}
-{% set title %}Конгресс интеллигенции против войны: {{object.title}}{% if object.author %} ({{object.author}}){% endif %}{% endset %}
+{% set title %}Конгресс интеллигенции против войны: {{object.title}}{% endset %}
 {% set description %}{{object.text|striptags|truncatewords:"40"}} {% endset %}
 
 
@@ -54,9 +54,9 @@
                                     </div>
                            
 
-
+<div class="maintext">
                                 {{ object.text|safe }}
-
+</div>
                             
  
              

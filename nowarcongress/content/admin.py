@@ -24,7 +24,7 @@ def post_to_facebook(self, request, queryset):
     for x in queryset:
         try:
             logger.info(x.get_absolute_url())
-            graph.put_object('306238759557765', 'feed', link='http://nowarcongress.com'+x.get_absolute_url())
+            graph.put_object('306238759557765', 'feed', link='http://nowarcongress.com'+x.get_absolute_url(), message=x.facebook_description)
         except:
             raise
 
@@ -41,7 +41,7 @@ class ContentAdmin(RelatedMediaAdmin, ModerationAdmin):
     list_filter = ('category', 'topic')
     fieldsets = (
         ('', {
-            'fields': ('title','date', 'text','category','author','source','topic','tags','comments_enabled',),
+            'fields': ('title','date', 'text','category','author','source','topic','tags','comments_enabled', 'facebook_description'),
         }),
         ('Если это заявление', {
             'classes': ('grp-collapse grp-closed',),
@@ -69,12 +69,15 @@ class SidebarAdmin(OrderedModelAdmin):
 class PetitionAdmin(ImportExportModelAdmin):
     raw_id_fields = ("outerparticipants",)
     resource_class = PetitionResource
-    pass
+    
 
 class SignatureAdmin(ImportExportModelAdmin):
     search_fields = ['second_name', 'first_name']
     resource_class = SignatureResource
-    pass
+    list_display = ('is_shown', '__unicode__', 'first_name', 'second_name', 'occupation', 'email', 'city','order')
+    list_editable = ('first_name','order', 'second_name','email','city','is_shown','occupation')
+    list_display_links = ('__unicode__',)
+    ordering = ['-added']
 
 admin.site.register(ContentItem, ContentAdmin)
 admin.site.register(ContentCategory, CategoryAdmin)

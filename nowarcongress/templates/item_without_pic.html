@@ -19,7 +19,7 @@
                                         </div>
                                         <p class="pheight">{{item.text|striptags|no_dumb_chars|truncatechars:"330"}}</p>
                                         <div class="item-author-footer">
-                                        {% if item.author.id != 7 %}
+                                        {% if item.author and item.author.id != 7 %}
                                                       <div class="item-author">
                                         
                                             <a href="{{item.author.get_absolute_url}}" class="author-photo"><img src="{% version item.author.photo 'mini_thumbnail' %}" alt=""></a>

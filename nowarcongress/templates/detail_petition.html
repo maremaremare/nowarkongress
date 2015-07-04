@@ -3,7 +3,7 @@
     
     {% load customtags  %}
     {% load fb_versions %}
-    {% set title %}Конгресс интеллигенции против войны: {{object.title}}{% if object.author %} ({{object.author}}){% endif %}{% endset %}
+    {% set title %}Конгресс интеллигенции против войны: {{object.title}}{% endset %}
 {% set description %}{{object.text|striptags|truncatewords:"40"}} {% endset %}
 <div class="strict-block">
     <div class="main-article">
@@ -66,7 +66,9 @@
                     
                 </div>
             </div>
+            <div class="maintext">
             {{ object.text|safe }}
+            </div>
             {% include "petitionpeople.html" %}
              <div class="social-article">
                                     <div class="custom-title"><strong>Поделиться:</strong></div>

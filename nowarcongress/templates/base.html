@@ -15,7 +15,13 @@
 		<meta property="og:title" content="{% get title %}"/> 
 		<meta property="og:description" content="{% get description %}"/> 
 		<meta property="og:site_name" content="Конгресс интеллигенции против войны"/>
+		{% block fbimage %}
+		{% if object.get_main_pic %}
+		<meta property="og:image" content="/media/{{object.get_main_pic.image.path}}" />
+		{% else %}
 		<meta property="og:image" content="{{ STATIC_URL }}images/dove.jpg" />
+		{% endif %}
+		{% endblock %}
 
 		<!-- Favicon -->
 		<link rel="shortcut icon" href="{{ STATIC_URL }}images/favicon.ico" type="image/x-icon" />
@@ -53,7 +59,7 @@
 	<body>
 
 		<!-- BEGIN .boxed -->
-		<div class="container boxed active">
+		<div class="container boxed active" style="display:none">
 			
 			<!-- BEGIN .header -->
 			<header class="header">
@@ -109,11 +115,14 @@
 							<li><a href="http://nowarcongress.com">В начало</a>	
 							<li><a href="#"><span>Все материалы</span></a>
 								<ul>
-									<li><a href="/blogs/">Блоги</a></li>
-									<li><a href="/publications/">Публикации</a></li>
-									<li><a href="/ng/">Публикации в Новой Газете</a></li>
-									<li><a href="/events/">Отчеты о мероприятиях</a></li>
-									<li><a href="/reports/">Тексты докладов</a></li>
+								{% for item in content_categories %}
+								{% if item.items.all|length and item.slug != 'inner' %}
+										<li><a href="{{item.get_absolute_url}}">{{item.title}}</a></li>
+								{% endif %}
+								
+								{% endfor %}
+									
+								
 								</ul>
 							</li>
 						<!--	<li><a href="/contacts/">Контакты</a></li>-->
@@ -191,6 +200,10 @@
 			<!-- BEGIN .content -->
 			<section class="content">
            {% include "jumplist.html" %}
+           
+           	{% include "blogs.html" %}
+         
+           
                 
                  {% block content %}
                    
@@ -230,6 +243,10 @@
 
 
 <script type="text/javascript">
+
+$(document).ready(function() {
+	$('.boxed').show()
+})
 // Test for the ugliness.
 if (window.location.hash == '#_=_'){
 

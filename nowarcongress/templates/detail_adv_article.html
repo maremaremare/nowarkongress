@@ -1,9 +1,10 @@
 {% extends "leftsidebar.html" %}
+{% load customtags fb_versions %}
 
 {% block maincontent %}
 
     
-{% load customtags fb_versions %}
+
 {% set title %}Конгресс интеллигенции против войны: {{object.title}}{% endset %}
 {% set description %}{{object.text|striptags|truncatewords:"40"}} {% endset %}
 

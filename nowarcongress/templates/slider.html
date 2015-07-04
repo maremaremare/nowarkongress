@@ -1,81 +1,84 @@
-﻿<div class="strict-block col-lg-12">
-                        <div class="block-title">
-                            <h2>Актуальное</h2>
+﻿<div class="strict-block col-lg-12" style="margin-top:5px">
+    <div class="block-title">
+        <h2>Актуальное</h2>
+    </div>
+    <div class="block-content block-slider">
+        <div class="col-lg-7 col-md-12" >
+        <div id="owl">
+            {% load customtags fb_versions %}
+            {% for slitem in slider_items|slice:"6" %}
+                <div class="item">
+                <!-- BEGIN big -->
+                <div  data-id="{{forloop.counter}}" class=" article-double-main">
+                <div class="item-photo">
+                    <a href="{{slitem.item.get_absolute_url}}">
+                        <img src="{% version slitem.image 'slidermax_thumbnail' %}" width="848" height="350" alt="">
+                    </a>
+                </div>
+                <div class="item-content">
+                    <h2><a href="{{slitem.item.get_absolute_url}}">{{slitem.item.title}}</a>
+                    </h2>
+                    <div class="item-icons">
+                        {% if item.author %}
+                            <a href="{{slitem.item.author.get_absolute_url}}"><i class="fa fa-user"></i>{{slitem.item.author.name}}</a>
+                        {% endif %}
+                        
+                        <a href="#"><i class="fa fa-calendar"></i>{{ slitem.item.date|date:"d E Y" }}</a>
+                        <a href="{{slitem.item.category.get_absolute_url}}"><i class="fa fa-{{slitem.item.category.icon}}"></i>{{slitem.item.category.title}}</a>
+                    </div>
+                    <div class="slitemtext">
+                    {{slitem.item.text|striptags|no_dumb_chars|truncatewords_html:"50"}}</div>
+                    <!--<a href="{{slitem.item.get_absolute_url}}" class="trans-button"><i class="fa fa-align-right"></i>Читать полностью</a>-->
+                </div>
+                
+            </div>
+            </div>
+        {% endfor %}
+        </div>
 
+               <!-- <div class="article-double-side">
+            {% for slitem in slider_items|slice:"6" %}
+                
+                <div class="item" data-id="{{forloop.counter}}">
+                    <div class="item-photo">
+                        <a href="{{slitem.item.get_absolute_url}}">
+                            <img src="{% version slitem.image 'slmin_thumbnail' %}" alt="">
+                        </a>
+                    </div>
+                    <div class="item-content">
+                        <h3><a href="{{slitem.item.get_absolute_url}}">{{slitem.item.title}}</a>
+                        
+                        </h3>
+                        <div class="item-links">
+                            <a href="{{slitem.item.get_absolute_url}}"><i class="fa fa-align-right"></i>Читать дальше</a>
+                            <a href="#"><i class="fa fa-calendar"></i>{{ slitem.item.date|date:"d E Y" }}</a>
+                            <a href="{{slitem.item.category.get_absolute_url}}"><i class="fa fa-{{slitem.item.category.icon}}"></i>{{slitem.item.category.title}}</a>
                         </div>
-                        <div class="block-content block-slider">
-                            <div class="col-lg-7 col-md-12">
+                    </div>
+                </div>
+            {% endfor %}
+        </div>-->
+    </div>
+    <div class="col-lg-5 col-md-12">
+             <div>
+            {% for item in news|slice:"18" %}
+                
 
-                   {% load customtags fb_versions %}
-
-{% for slitem in slider_items|slice:"6" %}
-    
-
-                                        <!-- BEGIN big -->
-                                        <div  data-id="{{forloop.counter}}" class="article-double-main {% if forloop.counter > 1 %}
-                                            hidden
-                                        {% endif %}">
-
-                                            <div class="item-photo">
-                                                <a href="{{slitem.item.get_absolute_url}}">
-                                                    <img src="{% version slitem.image 'slidermax_thumbnail' %}" width="848" height="350" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="item-content">
-                                                <h2><a href="{{slitem.item.get_absolute_url}}">{{slitem.item.title}}</a>
-                                                </h2>
-                                                <div class="item-icons">
-                                                {% if item.author %}
-                                                     <a href="{{slitem.item.author.get_absolute_url}}"><i class="fa fa-user"></i>{{slitem.item.author.name}}</a>
-                                                {% endif %}
-                                                   
-                                                    <a href="#"><i class="fa fa-calendar"></i>{{ slitem.item.date|date:"d E Y" }}</a>
-                                                    <a href="{{slitem.item.category.get_absolute_url}}"><i class="fa fa-{{slitem.item.category.icon}}"></i>{{slitem.item.category.title}}</a>
-                                                </div>
-                                                <div class="slitemtext">
-                                                {{slitem.item.text|striptags|no_dumb_chars|truncatewords_html:"50"}}</div>
-                                                <a href="{{slitem.item.get_absolute_url}}" class="trans-button"><i class="fa fa-align-right"></i>Читать полностью</a>
-                                            </div>
-
-                                            
-                                        </div>
-
-{% endfor %}
-                                    </div>
-                                    <div class="col-lg-5 col-md-12">
-
-                                        <!-- BEGIN .article-double-side -->
-                                        
-  <div class="article-double-side">
-                                        {% for slitem in slider_items|slice:"6" %}
-                                          
-
-                                            <div class="item" data-id="{{forloop.counter}}">
-                                                <div class="item-photo">
-                                                    <a href="{{slitem.item.get_absolute_url}}">
-                                                        <img src="{% version slitem.image 'slmin_thumbnail' %}" alt="">
-                                                    </a>
-                                                </div>
-                                                <div class="item-content">
-                                                    <h3><a href="{{slitem.item.get_absolute_url}}">{{slitem.item.title}}</a>
-                               
-                                                    </h3>
-                                                    <div class="item-links">
-                                                        <a href="{{slitem.item.get_absolute_url}}"><i class="fa fa-align-right"></i>Читать дальше</a>
-                                                        <a href="#"><i class="fa fa-calendar"></i>{{ slitem.item.date|date:"d E Y" }}</a>
-                                                        <a href="{{slitem.item.category.get_absolute_url}}"><i class="fa fa-{{slitem.item.category.icon}}"></i>{{slitem.item.category.title}}</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        {% endfor %}
+                <div class="item">
+               
+                    <div class="item-content">
+                        <h5><a href="{{item.get_absolute_url}}">{{ item.date|date:"d.m.y" }}: {{item.title}}</a>
+                        
+                        </h5>
+                        <div class="item-links">
+                          
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        
+    </div>
 </div>
-                                            <!-- END .article-double-side -->
-                                      
-
-                                    </div>
-                                </div>
-
-                                <!-- END .block-content -->
-                            </div>
-          
+<!-- END .block-content -->
+</div>

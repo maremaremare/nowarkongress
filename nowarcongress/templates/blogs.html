@@ -1,0 +1,16 @@
+
+{% load fb_versions %}
+
+ <div class="col-lg-12">
+ 
+{% for blog in blogs|slice:"4" %}
+<a href="{{blog.get_absolute_url}}">
+     <div class="col-lg-3 col-md-3 blogbox" style="background-image: url({% version blog.photo 'big_grayscale' %}); background-repeat:no-repeat;" >
+
+     <div class="blogboxtext" >{{blog.name}}</div>
+     
+ </div>
+ </a>
+{% endfor %}
+ 
+ </div>

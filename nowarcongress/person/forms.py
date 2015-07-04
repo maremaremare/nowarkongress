@@ -7,6 +7,8 @@ import autocomplete_light
 from autocomplete_light.contrib import taggit_tagfield
 from django.forms.models import inlineformset_factory
 import datetime
+from PIL import Image
+
 
 class ContentForm(forms.ModelForm):
     #date = forms.DateTimeField(initial = datetime.datetime.now) 
@@ -43,7 +45,34 @@ class ProfileForm(forms.ModelForm):
     class Meta:
         model = Person
         fields = ('first_name', 'second_name', 'occupation', 'city', 'facebook',
-                  'twitter', 'site', 'about', 'photo')
+                  'twitter', 'site', 'about', 'photo', 'active')
+
+
+    def clean_photo(self):
+        image = self.cleaned_data.get('photo', False)
+
+        if image:
+            img = Image.open(image)
+            w, h = img.size
+
+            #validate dimensions
+            min_width = min_height = 250
+            if w < min_width or h < min_height:
+                raise forms.ValidationError(
+                    'Изображение должно быть не меньше чем '
+                      '%s x %s пикселов.' % (min_width, min_height))
+
+            # #validate content type
+            # main, sub = image.content_type.split('/')
+            # if not (main == 'image' and sub.lower() in ['jpeg', 'pjpeg', 'png', 'jpg']):
+            #     raise forms.ValidationError(u'Пожалуйста, загружайте JPEG или PNG файлы.')
+
+            #validate file size
+            if len(image) > (1 * 1024 * 1024):
+                raise forms.ValidationError(u'Слишком большой файл ( максимум 1 мегабайт )')
+        else:
+            raise forms.ValidationError(u"При загрузке файла произошла ошибка. Попробуйте еще раз.")
+        return image
 
 
 
@@ -57,7 +86,7 @@ class InviteAdminForm(forms.Form):
     person = forms.ModelChoiceField(Person.objects.all(),
         widget=autocomplete_light.ChoiceWidget('PersonAutocompleteModelTemplate'), required=False)
     person.label = u'Если человек уже публиковался на сайте'
-    person.help_text = u'Начните вводить имя человека'
+    person.help_text = u'Начните вводить фамилию человека'
 
 class LoginForm(forms.Form):
     email = forms.EmailField()

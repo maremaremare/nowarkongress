@@ -1,71 +1,7 @@
     <!-- BEGIN .footer -->
             <footer class="footer">
                     
-                <!-- BEGIN .footer-blocks -->
-              <!--  <div class="footer-blocks">
                 
-                      
-                        <div class=" col-lg-4 col-md-12">
-                            <h3>Последние комментарии</h3>
-        
-                            <div class="w-news-list">
-                                {% for item in comments %}
-                                                                    <div class="item">
-                            
-                                    <div class="item-content footer-comment">
-                                        <h4><a href="{{item.content_object.get_absolute_url}}">{{item.content_object.title}}</a></h4>
-                                        <p>{{item.comment}}</p>
-                                        <div class="item-foot">
-                                          
-                                        <i class="fa fa-clock-o"></i><p>{{item.submit_date|date:"d.m.y H:i"}}</p>
-                                            <i class="fa fa-user"></i><p>{{item.name}}</p>
-                                        </div>
-                                    </div>
-                               
-                                </div>
-                                {% endfor %}
-                               
-
-                                
-                               
-                                </div>
-
-                            
-                        
-                        </div>
-
-                      
-                        <div class=" col-lg-4 col-md-12">
-                            <h3>Метки</h3>
-                            {% load taggit_extras %}
-                            {% get_taglist as tags %}
-                            <div class="tag-cloud">
-                            {% for tag in tags %}
-                                
-                            
-                                <a href="/tags/{{tag.slug}}">{{tag.name}}</a>
-                                {% endfor %}
-                            </div>
-                       
-                        </div>
-
-                        <div class="  col-lg-4 col-md-12">
-                            <h3>Календарь</h3>
-
-                            <div id="calendar_wrap">
-
-                            {{cal|safe}}
-                               
-                            </div>
-                 
-                        </div>
-
-                        <div class="clear-float"></div>
-
-
-                
-                </div> -->
-                
-   <div class="col-lg-12 bfoot"><p class="center-block">(с) 2014 Конгресс интеллигенции против войны. Все права приналежат авторам.</p></div>
+   <div class="col-lg-12 bfoot"><p class="center-block">(с) 2014 Конгресс интеллигенции против войны. Все права приналежат авторам. По всем вопросам пишите по адресу admin@nowarcongress.com <a href="https://www.facebook.com/antiwarcongress">Мы в фейсбуке</a>  </p></div>
             <!-- END .footer -->
             </footer>

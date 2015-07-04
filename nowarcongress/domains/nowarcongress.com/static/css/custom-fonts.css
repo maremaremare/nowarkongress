@@ -1,0 +1,209 @@
+@import "https://nowarcongress.com/static/css/fonts.css";
+/*font-family: 'Lato';
+font-size: 22px;
+font-weight: 300;
+font-style: normal;
+color: #000000;
+line-height: 1.18em;
+letter-spacing: 0em;
+*/
+
+
+/*font-family: 'DejaVu Sans';
+font-size: 14px;
+font-weight: 400;
+font-style: normal;
+color: #FFFFFF;
+line-height: 1.42em;
+letter-spacing: 0em;*/
+
+.header-topmenu ul li a {
+    font-family: "PT Sans", sans-serif;
+    font-weight: normal!important;
+}
+
+body {
+    font-family: "PT Sans Narrow", sans-serif;
+    font-weight: normal!important;
+}
+
+p {
+    font-family: 'PT Sans', sans-serif;
+    font-size: 15px;
+    line-height: 140%;
+    text-align: justify;
+}
+
+.item-block .item-content .item-author .author-name {
+    font-family: "PT Sans Narrow", sans-serif;
+    font-weight:300;
+
+}
+
+.logobigold {
+font-family: 'AshleyCapitaliSofia';
+font-size: 64px;
+font-weight: 400;
+font-style: normal;
+color: rgb(94,94,94);
+line-height: 1.42em;
+letter-spacing: 0em;
+display:block;
+text-shadow: -10px -10px 10px rgba(255, 255, 255, 0.2), 10px 10px 10px rgba(255, 255, 255, 0.2), 10px 1px 10px rgba(36, 122, 91, 0.7); 
+}
+
+.logobig {
+    font-family: 'latoheavy';
+font-size: 76px;
+text-transform: uppercase;
+font-weight: 400;
+font-style: normal;
+color: rgba(94,94,94, 1);
+line-height: 1.42em;
+letter-spacing: 0em;
+display: block;
+}
+
+.logosmallold {
+ 
+font-family: 'Constantine';
+font-size: 22px;
+font-weight: 400;
+font-style: normal;
+color: rgb(94,94,94);
+line-height: 1.41em;
+letter-spacing: 0.2em;
+display:block;
+}
+
+.logosmall {
+    font-family: 'latoregular';
+font-size: 22px;
+font-weight: 400;
+font-style: normal;
+color: rgb(94,94,94);
+line-height: 1.41em;
+letter-spacing: 0.2em;
+display: block;
+text-transform: uppercase;
+}
+
+.smalllogobig {
+
+font-size: 36px!important;
+
+} 
+
+.smalllogosmall {
+
+font-size: 18px!important;
+
+}
+
+.small-header-logo {
+    width: auto!important;
+}
+
+a:focus {
+    text-decoration: none;
+}
+/* Menu & Titles font family */
+h1, h2, h3,
+h4, h5, h6,
+.header #main-menu a,
+.header #top-sub-menu a,
+.header-2-content .header-weather strong,
+.widget-contact li strong,
+.item-block-4 .item-header strong,
+.pagination,
+.bigbutton,
+.panel-title-right,
+.photo-gallery-grid .item .category-photo, input[type=submit] {
+	font-family: 'latoregular';
+    
+    text-transform:none;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.004);
+
+}
+
+.pagination,
+.bigbutton,
+input[type=submit] {
+    font-family:'latothin'!important;
+}
+
+.article-h1 {
+    text-transform:none!important;
+}
+
+.item-comment span {
+    font-family: 'latoregular'
+}
+
+.strict-block .block-title h2, #sidebar .widget > h3  {
+font-family: 'latothin';
+}
+
+.header #main-menu .wrapper > ul > li > a span {
+    font-size:14px;
+    font-family:'latoregular';
+    font-weight:normal!important;
+    padding-right:7px;
+}
+
+.main-about {
+    font-size:22px!important;
+    font-family: 'latoregular';
+}
+
+.main-article p {
+    font-family:'PT Sans Narrow'!important;
+}
+
+.maintext, .maintext p, .maintext p span {
+    font-family:'PT Sans'!important;
+    font-size:18px!important;
+    line-height:24px!important;
+
+}
+
+.item-block h3 {
+    font-family:'PT Sans';
+}
+
+.bigbutton {
+    color:black!important;
+}
+
+.pagination {
+    font-size:36px;
+}
+
+h4 {font-weight:bold}
+
+/* Link color */
+a {
+	color: rgba(52, 156, 101, 1);
+}
+
+/* Mouse-Over link color */
+a:hover {
+	color: rgba(52, 156, 101, 1);
+
+/* Footer Widget Title Color */
+.footer .widget > h3 {
+	color: #353535;
+}
+
+/* Footer Widget Title Bottom Border */
+.footer .widget > h3 {
+	border-bottom: 3px solid #2c3e50;
+}
+
+.header #top-sub-menu ul li a {
+    text-transform:none!important;
+}
+
+.main-article .article-header .article-meta .meta-tools > span, .main-article .article-header .article-meta .meta-tools > a {
+    font-family: 'PT Sans'!important;
+}

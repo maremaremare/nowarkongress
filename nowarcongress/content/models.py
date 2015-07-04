@@ -34,12 +34,19 @@ class DefaultSelectOrPrefetchManager(models.Manager):
 class OuterParticipant(models.Model):
     first_name = models.CharField(max_length=50, verbose_name=u'Имя')
     second_name = models.CharField(max_length=50, verbose_name=u'Фамилия')
+    email = models.EmailField(verbose_name=u'Email', default='')
     occupation = models.CharField(max_length=250, verbose_name=u'Род занятий', blank=True)
     city = models.CharField(max_length=50, verbose_name=u'Город', blank=True)
+    is_shown = models.BooleanField(default=False, verbose_name=u'Показывать на сайте?')
+    added = models.DateTimeField(null=True, auto_now=True, verbose_name=u'Дата добавления/изменения')
+    order = models.IntegerField(null=True, blank=True, verbose_name=u'Порядок')
+
+
 
     class Meta:
         verbose_name = ('Человек, подписавший заявление')
         verbose_name_plural = ('Люди, подписавшие заявление')
+        ordering = ['order','second_name']
 
     def __unicode__(self):
         return self.first_name+' '+self.second_name
@@ -65,6 +72,9 @@ class Petition(models.Model):
 
     def get_number(self):
         return  self.outerparticipants.count()
+
+    def shown_count(self):
+        return self.outerparticipants.filter(is_shown=True).count()
 
     def get_absolute_url(self):
         return '/petition/{0}/people'.format(self.id)
@@ -157,6 +167,7 @@ class ContentItem(models.Model):
 
     title = models.CharField(max_length=200, verbose_name=u'Название')
     text = models.TextField(verbose_name=u'Текст')
+    facebook_description = models.CharField(max_length=350, verbose_name=u'Описание для публикации в фейсбуке', null=True, blank=True)
     date = models.DateTimeField(auto_now=False, verbose_name=u'Дата')
     category = models.ForeignKey(
         ContentCategory, related_name='items', verbose_name=u'Категория', db_index=True)
@@ -187,6 +198,9 @@ class ContentItem(models.Model):
 
     def get_absolute_url(self):
         return '/{0}/{1}'.format(self.category.slug, self.id)
+
+    def get_main_pic(self):
+        return self.photos.all().first() or None
 
     class Meta:
         verbose_name = ('Материал')

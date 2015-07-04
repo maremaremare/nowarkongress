@@ -1,0 +1,3 @@
+{% if 'blogs' in request.GET %}
+    YAY!
+{% endif %}

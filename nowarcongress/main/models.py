@@ -45,11 +45,12 @@ class SliderItem(OrderedModel):
     image = FileBrowseField("Image", max_length=200, directory="photos/", extensions=[".jpg",".jpeg",".png"], blank=True, null=True)
     item = models.ForeignKey(ContentItem, verbose_name=u'Материал')
     datetime = models.DateTimeField(auto_now=True, blank=True, null=True)
+    slider_order = models.IntegerField(verbose_name=u'Порядок')
 
     class Meta(OrderedModel.Meta):
         verbose_name = ('Элемент слайдера')
         verbose_name_plural = ('Элементы слайдера')
-        ordering = ['datetime']
+        ordering = ['slider_order']
 
     def __unicode__(self):
         return self.item.title

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+  {% load crispy_forms_tags %}
+<div class="strict-block col-lg-12">
+                            <div class="block-title">
+                                <h2>Ваша подпись будет рассмотрена модератором</h2>
+                            </div>
+
+                            <!-- BEGIN .block-content -->
+                            <div class="block-content main-article main-about">
+                            Ваша подпись будет опубликована на сайте сразу после того, как ее просмотрит и одобрит модератор. Просим прощения за неудобства.
+                        
+                    
+                            <!-- END .block-content -->
+                            </div>
+                        <!-- END .strict-block -->
+                        </div>
+
+                      
+
+{% endblock %}
+
+{% load customtags %}
+{% set title %}Конгресс интеллигенции против войны: подпись отправлена на модерацию{% endset %}
+{% set description %}Заявление подписано, подпись будет опубликована после одобрения модератора{% endset %}

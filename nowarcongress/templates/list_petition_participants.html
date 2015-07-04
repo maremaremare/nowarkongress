@@ -9,7 +9,7 @@
 
 {% block maincontent %}
 
-<h1><a href="{{object.text.get_absolute_url}}">Заявление Конгресса "{{object.title}}" &ndash; все подписи</a></h1>
+<h1 class="article-h1"><a href="{{object.text.get_absolute_url}}">Заявление Конгресса "{{object.title}}" &ndash; все подписи</a></h1>
 <div class="spacer-1" style="background:#BCBCBC;color:#BCBCBC;"></div>
 
 
@@ -17,13 +17,17 @@
 <div class="blog-style">
 
 
-{% for person in object.outerparticipants.all %}
+{% for person in participants %}
+{% if person.is_shown %}
+  
+
   <div class="list-people-item">
-  <h4><strong>{{person.first_name}} {{person.second_name}}</strong>{% if person.occupation %}, <span class="lower">{{person.occupation}}</span>
+  <h5><strong>{{person.first_name}} {{person.second_name}}</strong>{% if person.occupation %}, <span class="lower">{{person.occupation}}</span>
   {% endif %}  {% if person.city %}
     ({{person.city}})
-  {% endif %}</h4>{% if not forloop.last %},{% endif %}
+  {% endif %}</h5>{% if not forloop.last %},{% endif %}
   </div>
+  {% endif %}
 {% endfor %}
                                 
     

@@ -8,6 +8,7 @@ from django.core.exceptions import PermissionDenied
 from person.mixins import LoginRequiredMixin
 from .forms import *
 from django.http import HttpResponseRedirect
+from django.db.models import Q
 
 # Create your views here.
 
@@ -17,7 +18,15 @@ import logging
 # Get an instance of a logger
 logger = logging.getLogger('my')
 
+class SearchView(ListView):
+    model = ContentItem
+    template_name='search.html'
+    
+    def get_queryset(self):
+        q = self.request.GET.get('q','')
+        return ContentItem.objects.filter(Q(title__icontains=q) | Q(text__icontains=q))
 
+   
 
 class ContentItemListView(ListView):
 

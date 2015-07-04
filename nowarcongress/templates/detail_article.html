@@ -1,7 +1,7 @@
 {% extends "leftsidebar.html" %}
 {% load customtags %}
 {% load fb_versions %}
-{% set title %}Конгресс интеллигенции против войны: {{object.title}}{% if object.author %} ({{object.author}}){% endif %}{% endset %}
+{% set title %}Конгресс интеллигенции против войны: {{object.title}}{% if object.author and obkject.author.id != 7 %} ({{object.author}}){% endif %}{% endset %}
 {% set description %}{{object.text|striptags|truncatewords:"40"}} {% endset %}
 
 
@@ -46,7 +46,7 @@
                                                   
                                                          <div class="meta-tools">
                                             <a href="#"><i class="fa fa-print"></i>Распечатать материал</a>
-                                            <span><i class="fa fa-text-height"></i>Изменить размер шрифта <span class="f-size"><a href="#font-size-down">-</a><span class="f-size-number">16</span><a href="#font-size-up">+</a></span></span>
+                                           
                                         </div>
                                         {% if object.category.slug != 'inner' %}
                                          <div class="meta-tools">
@@ -63,9 +63,10 @@
                        
                                     </div>
                                 </div>
-
+<div class="maintext">
 
                                 {{ object.text|safe }}
+                                </div>
 
                           {% include "photos.html" %}
                           {% include "videos.html" %}

@@ -26,6 +26,8 @@ class UserAdmin(UserAdmin):
 from filebrowser.widgets import FileInput
 
 class PhotoOptions(admin.ModelAdmin):
+    change_list_template = "admin/change_list_filter_sidebar.html"
+    list_filter = ('active',)
     list_display = ('__unicode__', 'occupation')
     formfield_overrides = {
         models.ImageField: {'widget': FileInput},

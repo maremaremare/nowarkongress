@@ -13,10 +13,16 @@ class SectionAdmin(OrderedModelAdmin):
 
 class PartnerAdmin(OrderedModelAdmin):
     list_display = ('__unicode__', 'move_up_down_links',)
+
+class SliderAdmin(admin.ModelAdmin):
+    list_display = ('__unicode__', 'slider_order',)
+    list_editable = ('slider_order',)
+    list_display_links = ('__unicode__',)
+
   
 admin.site.unregister(Site)
 
-admin.site.register(SliderItem)
+admin.site.register(SliderItem, SliderAdmin)
 admin.site.register(HomePageSection, SectionAdmin)
 admin.site.register(Partner, PartnerAdmin)
 admin.site.register(Quote)

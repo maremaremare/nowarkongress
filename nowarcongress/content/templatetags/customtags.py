@@ -2,10 +2,22 @@
 from django import template
 from django.utils.safestring import mark_safe
 
+def chunks(s, n):
+    """Produce `n`-character chunks from `s`."""
+    for start in range(0, len(s), n):
+        yield s[start:start+n]
+
 register = template.Library()
 @register.filter
 def to_class_name(value):
     return value.__class__.__name__
+
+@register.filter
+def get_chunks(value, num):
+    arr = []
+    for chunk in chunks(value, num):
+       arr.append(chunk)
+    return arr
 
 
 

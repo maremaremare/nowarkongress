@@ -15,6 +15,6 @@ from person.models import Person
 
 autocomplete_light.register(Person, 
     autocomplete_light.AutocompleteModelTemplate, 
-    search_fields=['name'],
-    autocomplete_js_attributes={'placeholder': u'Начните вводить имя человека',},
+    search_fields=['second_name'],
+    autocomplete_js_attributes={'placeholder': u'Начните вводить фамилию человека',},
     choice_template='personautocomplete.html')

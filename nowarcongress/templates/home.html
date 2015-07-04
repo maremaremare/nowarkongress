@@ -6,7 +6,7 @@
 
 {% block content %}
  <div class="content-main">
- {% include "quote.html" %}
+
     {% include "slider.html" %}
     {% for section in section_list %}
         
@@ -61,17 +61,19 @@
 {% endblock content %}
 
 {% block customjs %}
-    <script type="text/javascript">
-$(function() {
 
-
-    $('.banner').unslider({  speed: 500,               //  The speed to animate each slide (in milliseconds)
-    delay: 5000,              //  The delay between slide animations (in milliseconds)
-    complete: function() {},  //  A function that gets called after every slide animation
-    keys: true,               //  Enable keyboard (left, right) arrow shortcuts
-    dots: true,               //  Display dot navigation
-    fluid: true  
-});
+    <script>
+    $(document).ready(function() {
+ 
+  $("#owl").owlCarousel({
+ 
+      //navigation : true, // Show next and prev buttons
+      slideSpeed : 300,
+      paginationSpeed : 400,
+      singleItem:true
+ 
+  });
+ 
 });
     </script>
 {% endblock customjs %}

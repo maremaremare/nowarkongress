@@ -1,6 +1,6 @@
 from moderation import moderation
 from moderation.moderator import GenericModerator
-from .models import ContentItem
+from .models import ContentItem, OuterParticipant
 from threadedcomments.models import ThreadedComment
 from moderation.message_backends import StandartMessageBackend
 
@@ -21,8 +21,15 @@ class CommentModerator(GenericModerator):
     notify_user = False
     auto_approve_for_superusers = True
     auto_approve_for_authenticated = True
+
+
+class SignatureModerator(GenericModerator):
+    notify_user = False
+    auto_approve_for_superusers = True
+    auto_approve_for_authenticated = True
    
 
 moderation.register(ContentItem, ContentModerator)
 moderation.register(ThreadedComment, CommentModerator)
+#moderation.register(OuterParticipant, SignatureModerator)
 

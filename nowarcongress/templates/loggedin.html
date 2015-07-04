@@ -4,7 +4,9 @@
 
 {% block maincontent %}
 {% load fb_versions %}
-<h1 style="margin-bottom:35px">{{user.profile.name}}{% if user.profile.occupation %}, {{user.profile.occupation}}{% endif %}</h1>
+<h1 style="margin-bottom:35px">{{user.profile.name}}{% if user.profile.occupation %}, {{user.profile.occupation}}{% endif %}{% if not user.profile.active %}
+  (Ваш профиль виден только Вам)   
+{% endif %}</h1>
 
 <div class="strict-block">
                             <div class="block-title">
@@ -22,7 +24,7 @@
 
                                 </div>
                               {{user.profile.about|safe}}
-
+<br style="clear:both">
                             <!-- END .block-content -->
                             </div>
                         <!-- END .strict-block -->

@@ -8,6 +8,7 @@ from content.models import Petition, OuterParticipant, ContentItem
 from django.http import HttpResponseRedirect, HttpResponseForbidden
 from django.views.generic.detail import SingleObjectMixin
 from captcha.fields import ReCaptchaField
+from django.http import HttpResponse
 
 class AddNameToPetitionView(SingleObjectMixin, View):
   
@@ -35,7 +36,7 @@ class AddNameToPetitionView(SingleObjectMixin, View):
             return HttpResponseRedirect('/petition/{0}'.format(self.object.contentitem.all()[0].id))
 
         except:
-            raise
+            
 
 
             return HttpResponseRedirect('/petition/{0}'.format(self.object.contentitem.all()[0].id))
@@ -55,7 +56,7 @@ class AddOuterNameToPetitionView(View):
             x = self.request.session['signed_petitions']
             x.append(int(self.kwargs['petition']))
             self.request.session['signed_petitions'] = x
-            return HttpResponseRedirect(request.GET['back'])
+            return HttpResponseRedirect('/signature/added')
         except:
             
             return HttpResponseRedirect(request.GET['back'])
@@ -68,8 +69,14 @@ class ParticipantsView(DetailView):
     template_name = 'list_petition_participants.html'
 
     def get_context_data(self, **kwargs):
+        latin = r'^[a-zA-Z]+'
+        cyrillic = r'^[а-яА-Я]+'
         context = super(ParticipantsView, self).get_context_data(**kwargs)
         context['allpetitions'] = ContentItem.objects.filter(category__slug='petitions')[:5]
+        latin_participants = self.get_object().outerparticipants.filter(second_name__regex=latin)
+        cyrillic_participants = self.get_object().outerparticipants.filter(second_name__regex=cyrillic)
+        import itertools
+        context['participants'] = list(itertools.chain(cyrillic_participants, latin_participants))
         return context
 
 
@@ -78,12 +85,14 @@ class OuterParticipantsForm(forms.ModelForm):
 
     class Meta:
         model = OuterParticipant
+        fields = ('first_name', 'second_name', 'email', 'occupation', 'city')
+
 
 
 class OuterParticipantsCreateView(CreateView):
     model = OuterParticipant
     template_name = 'outerpetitioncreate.html'
-    #form_class = OuterParticipantsForm
+    form_class = OuterParticipantsForm
 
     def __init__(self, **kwargs):
     # Go through keyword arguments, and either save their values to our
@@ -106,12 +115,13 @@ class OuterParticipantsCreateView(CreateView):
                 self.request.session['second_name'] = form.cleaned_data['second_name']
                 self.request.session['city'] = form.cleaned_data['city']
                 self.request.session['occupation'] = form.cleaned_data['occupation']
+                return HttpResponseRedirect('/signature/added')
 
-                return HttpResponseRedirect(petition.contentitem.all()[0].get_absolute_url())
+                #return HttpResponseRedirect(petition.contentitem.all()[0].get_absolute_url())
             else:
-                raise
+                return HttpResponse('1')
         except:
-            raise
+            return HttpResponse('2')
     def get_context_data(self, **kwargs):
         context = super(OuterParticipantsCreateView, self).get_context_data(**kwargs)
         context['pk'] = kwargs

@@ -6,7 +6,7 @@ from moderation.models import ModeratedObject
 from django.http import HttpResponseRedirect
 from .models import *
 from main.models import SliderItem
-
+from django.core.exceptions import PermissionDenied
 
 # import User models and User forms
 # from .forms import ProfileForm, BlogForm
@@ -87,6 +87,27 @@ class PersonDetailView(DetailView):
                 context[x.category.slug] = []
             context[x.category.slug].append(x)
         return context
+
+    def get_object(self, queryset=None):
+        """
+        Returns the object the view is displaying.
+        By default this requires `self.queryset` and a `pk` or `slug` argument
+        in the URLconf, but subclasses can override this to return any object.
+        """
+        # Use a custom queryset if provided; this is required for subclasses
+        # like DateDetailView
+        base_obj = super(PersonDetailView, self).get_object()
+        if not base_obj.active:
+            if self.request.user.is_authenticated() and base_obj.user == self.request.user:
+                return base_obj
+            else:
+                
+                raise PermissionDenied()
+
+                #return HttpResponseForbidden()
+
+        else:
+            return base_obj
 
 class NeverCacheMixin(object):
     @method_decorator(never_cache)
@@ -304,6 +325,7 @@ class InviteAdminView(LoginRequiredMixin, TemplateView, FormView):
 
     def form_valid(self, form):
         if form.is_valid():
+            print('i try to send')
 
             invite(form.cleaned_data['email'], self.request.user, profile=form.cleaned_data['person'], current_time=datetime.now())
 

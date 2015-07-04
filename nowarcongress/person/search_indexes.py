@@ -13,3 +13,6 @@ class PersonIndex(indexes.SearchIndex, indexes.Indexable):
     def index_queryset(self, using=None):
         """Used when the entire index for model is updated."""
         return self.get_model().objects.all()
+
+    def prepare_term(self, term):
+        return term[:245]

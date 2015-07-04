@@ -2,14 +2,14 @@
 {% block content %}
 {% load customtags crispy_forms_tags fb_versions %}
 <div class="strict-block col-lg-12">
-<h1>{{listtitle}}</h1>
+<h1>Сообщество Конгресса</h1>
 
 <input type="text" name="q" id="navigation_autocomplete" class="form-control" placeholder="Начните вводить имя человека" style="font-size: 16px; margin-bottom:20px" />
 
 
 {% for person in object_list %}
     
-{% if not person.active and person.id != 7 %}
+{% if person.active and person.id != 7 %}
                                <!-- BEGIN .block-content -->
                             <div class="block-content block-content-blue main-article" width="100">
                                 <div class="item-content list-photo">

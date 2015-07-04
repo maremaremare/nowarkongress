@@ -23,7 +23,7 @@ from filebrowser.sites import site
 
 
 def robots(request):
-    html = 'User-agent: *\r\nDisallow: /'
+    html = 'User-agent: *\r\nDisallow: /siteadmin/admin'
     return HttpResponse(html)
 
 def yandex(request):
@@ -39,10 +39,11 @@ urlpatterns = patterns('',
                        url(r'^0a0915f4dc4f.html', yandex),
                        url(r'^robots.txt', robots),
                        url(r'^feed/$', LatestEntriesFeed()),
-                       url(r'^search/', include('haystack.urls')),
+                       url(r'^search/', SearchView.as_view()),
                        url(r'^logout/$', 'django.contrib.auth.views.logout', {'next_page': '/'}),
                        url(r'^login-form/$', LoginView.as_view()),
                        url(r'^loginfailed/$', TemplateView.as_view(template_name='loginfailed.html')),
+                       url(r'^signature/added/$', TemplateView.as_view(template_name='addedsignature.html')),
                        url(r'^comments/', include('fluent_comments.urls')),
                        url(r'^profile/messages/', include('django_messages.urls')),
                        url(r'^profile/', include('person.urls', namespace='people')),
