@@ -1,0 +1,90 @@
+##### Pre-install system packages #####
+# or will have to reinstall later.
+
+# To use images, install libjpeg-devel, e.g.
+yum -y install libjpeg-turbo-devel
+
+# To compile psycopg2, install postgresql-devel (on Fedora) 
+# or maybe other postgres libs on other distributions, see
+# http://stackoverflow.com/questions/12911717/error-command-gcc-failed-with-exit-status-when-installing-psycopg2
+yum -y install postgresql-devel
+
+##### Install requirements #####
+pip install -r requirements.txt
+
+### Creation of requirements.txt ###
+# requirements.txt was generated on production's virtualenv via pip freeze,
+# and then fixed with the steps below.
+
+# In git repositories, changed /HEAD to _HEAD,
+# like django_newsletter-origin_HEAD
+# https://github.com/pypa/pip/issues/1083
+
+# comment django-app-name-translation-in-admin==0.1.0.dev, and 
+pip install git+git://github.com/bmihelac/django-app-name-translation-in-admin.git@next
+# https://github.com/bmihelac/django-app-name-translation-in-admin
+
+##### Install more packages and fix installed ones #####
+# probably should be reflected later in code.
+
+# Add the following to the end of 
+# $ENV/lib/python2.7/site-packages/taggit/models.py :
+echo """class RusTag(Tag):
+
+    class Meta:
+        proxy = True
+
+    def slugify(self, tag, i=None):
+        slug = tag.lower().replace(' ', '-')
+        if i is not None:
+            slug += '-%d' % i
+        return transliterate(slug)
+
+
+class RusTaggedItem(TaggedItem):
+
+    class Meta:
+        proxy = True
+
+    @classmethod
+    def tag_model(cls):
+        return RusTag
+"""
+# (similar to http://timonweb.com/posts/russian-slugs-for-django-taggit/)
+
+# Install xapian in virtualenv. Can be as in 
+# http://django-haystack.readthedocs.org/en/latest/installing_search_engines.html#xapian
+# or 
+# yum -y install xapian-bindings-python
+# cp -rp /usr/lib64/python2.7/site-packages/xapian $ENV/lib/python2.7/site-packages
+
+# add to $ENV/lib/python2.7/site-packages/moderation/message_backends.py
+echo """
+
+class StandartMessageBackend(BaseMessageBackend):
+    def send(self, **kwargs):
+        subject = kwargs.get('subject', None)
+        message = kwargs.get('message', None)
+        recipient_list = kwargs.get('recipient_list', None)
+        new_message = Message.objects.create(subject=subject, body=message, recipient=recipient_list)
+        new_message.save()
+
+"""
+
+# in $ENV/lib/python2.7/site-packages/inviter/urls.py
+# from django.conf.urls.defaults import patterns, url
+# delete '.defaults'
+# http://stackoverflow.com/a/19962822/952234
+
+# #texttable==0.8.1 was not found by peep, remains uninstalled, 
+# but doesn't cause troubles yet.
+
+##### Apply local settings #####
+cd nowarcongress/nowarcongress/settings
+echo PAGE_ACCESS_TOKEN = \'\' > secrets.py
+cp example_locallocal.py locallocal.py
+# edit locallocal.py
+
+# Run server with
+python manage.py runserver --settings=nowarcongress.settings.local
+

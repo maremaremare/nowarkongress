@@ -20,6 +20,9 @@ build
 #secrets
 secrets.py
 
+# individual configuration
+locallocal.py
+
 #misc folder
 misc
 

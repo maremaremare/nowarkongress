@@ -47,40 +47,6 @@ STATIC_ROOT = '/home/maremare/domains/' + SITE_DOMAIN_NAME + '/staticroot/'
 MEDIA_ROOT = '/home/maremare/domains/' + SITE_DOMAIN_NAME + '/media/'
 COMPRESS_ROOT = '/home/maremare/domains/' + SITE_DOMAIN_NAME + '/static/'
 COMPRESS_URL = '/static/'
-FILEBROWSER_MEDIA_ROOT = MEDIA_ROOT
-FILEBROWSER_MEDIA_URL = MEDIA_URL
-FILEBROWSER_DIRECTORY = 'photos/'
-FILEBROWSER_ADMIN_THUMBNAIL = 'admin_thumbnail'
-
-def grayscale(im):
-    "Convert image to grayscale"
-    if im.mode != "L":
-        im = im.convert("L")
-    return im
-
-FILEBROWSER_VERSIONS =  {
-    'admin_thumbnail': {'verbose_name': 'Admin Thumbnail', 'width': 60, 'height': 60, 'opts': 'crop'},
-    'thumbnail': {'verbose_name': 'Thumbnail (1 col)', 'width': 60, 'height': 60, 'opts': 'crop'},
-    'small': {'verbose_name': 'Small (2 col)', 'width': 140, 'height': '', 'opts': ''},
-    'medium': {'verbose_name': 'Medium (4col )', 'width': 300, 'height': '', 'opts': ''},
-    'big': {'verbose_name': 'Big (6 col)', 'width': 460, 'height': '', 'opts': ''},
-    'big_grayscale': {'verbose_name': 'Big (6 col)', 'width': 460, 'height': '', 'opts': '', 'methods': [grayscale]},
-    'large': {'verbose_name': 'Large (8 col)', 'width': 680, 'height': '', 'opts': 'crop'},
-    'slmax_thumbnail':  {'verbose_name': u'На верху статьи', 'width': 848, 'height': 350, 'opts': 'crop'},
-    'slidermax_thumbnail':  {'verbose_name': u'slmax', 'width': 620, 'height': 350, 'opts': 'crop'},
-    'slmin_thumbnail':  {'verbose_name': u'slmin', 'width': 96, 'height': 60, 'opts': ''},
-    'sidebar_thumbnail':  {'verbose_name': u'sidebar', 'width': 50, 'height': 50, 'opts': 'crop'},
-    'adv_thumbnail':  {'verbose_name': u'adv', 'width': 247, 'height': 175, 'opts': 'crop'},
-    'adv_thumbnail_detail':  {'verbose_name': u'adv_detail', 'width': 247, 'height': '', 'opts': ''},
-    'owlcarousel_thumbnail':  {'verbose_name': u'owlcarousel', 'width': 848, 'height': 485, 'opts': 'crop'},
-    'list_thumbnail':  {'verbose_name': u'list', 'width': 340, 'height': 240, 'opts': 'crop'},
-    'plist_thumbnail':  {'verbose_name': u'personlist', 'width': 200, 'height': 200, 'opts': 'crop'},
-    'mini_thumbnail': {'verbose_name': u'mini', 'width': 50, 'height': 50, 'opts': 'crop'},
-    'micro_thumbnail': {'verbose_name': u'micro', 'width': 25, 'height': 25, 'opts': 'crop'},
-    'detail_thumbnail': {'verbose_name': u'owlcarousel', 'width': 100, 'height': 100, 'opts': 'crop'},
-}
-
-FILEBROWSER_ADMIN_VERSIONS = ['slmax_thumbnail', 'small', 'medium', 'big', 'large']
 
 # DATABASE CONFIGURATION
 DATABASES = {
