@@ -1,23 +1,16 @@
 """Development settings and globals."""
 
+from os.path import join, normpath, dirname, abspath
 
-from os.path import join, normpath
+from locallocal import *
 
 from base import *
-
-
-# MEDIA CONFIGURATION
-# See: https://docs.djangoproject.com/en/dev/ref/settings/#media-root
-MEDIA_ROOT = '/home/ak/dev/domains/nowarkongress.ru/media/'
-
-# See: https://docs.djangoproject.com/en/dev/ref/settings/#media-url
-
-# END MEDIA CONFIGURATION
-
+# overwrite base.py
+# TIMELOG_LOG = os.path.join(SITE_ROOT, 'time.log')
 
 # STATIC FILE CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#static-root
-STATIC_ROOT = '/home/ak/dev/domains/nowar-kongress.com/static/root/'
+STATIC_ROOT = os.path.join(SITE_ROOT, 'domains/nowarcongress.com/static/root/')
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#static-url
 STATIC_URL = '/static/'
@@ -25,14 +18,14 @@ STATIC_URL = '/static/'
 # See:
 # https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#std:setting-STATICFILES_DIRS
 STATICFILES_DIRS = (
-    '/home/ak/dev/domains/nowar-kongress.com/static/',
+    os.path.join(SITE_ROOT, 'domains/nowarcongress.com/static/'),
 )
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    '/home/ak/dev/django/nowarkongress/nowarkongress/templates/',
+    os.path.join(SITE_ROOT, 'templates/'),
 )
 # DEBUG CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#debug
@@ -47,22 +40,6 @@ TEMPLATE_DEBUG = DEBUG
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#email-backend
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # END EMAIL CONFIGURATION
-
-
-# DATABASE CONFIGURATION
-# See: https://docs.djangoproject.com/en/dev/ref/settings/#databases
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': normpath(join(DJANGO_ROOT, 'default.db')),
-        'USER': '',
-        'PASSWORD': '',
-        'HOST': '',
-        'PORT': '',
-    }
-}
-# END DATABASE CONFIGURATION
-
 
 # CACHE CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#caches
