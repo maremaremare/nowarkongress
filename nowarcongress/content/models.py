@@ -37,7 +37,7 @@ class OuterParticipant(models.Model):
     email = models.EmailField(verbose_name=u'Email', default='')
     occupation = models.CharField(max_length=250, verbose_name=u'Род занятий', blank=True)
     city = models.CharField(max_length=50, verbose_name=u'Город', blank=True)
-    is_shown = models.BooleanField(default=True, verbose_name=u'Показывать на сайте?')
+    is_shown = models.BooleanField(default=False, verbose_name=u'Показывать на сайте?')
     added = models.DateTimeField(null=True, auto_now=True, verbose_name=u'Дата добавления/изменения')
     order = models.IntegerField(null=True, blank=True, verbose_name=u'Порядок')
 
