@@ -134,7 +134,7 @@ class ContentDetailView(DetailView):
                     context[item.context_name] = item.content_object.items.all()
                 
                 else:
-                    context[item.context_name] = item.content_object
+                    context[item.context_name] = [item.content_object,]
             elif item.content_type and not item.object_id:
                 context[item.context_name] = item.content_type.model_class().objects.all()[:item.number]
 

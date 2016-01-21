@@ -35,7 +35,8 @@ class TagListView(TemplateView):
         context['listtitle'] = u'Все материалы с меткой «' + tagname + u'»'
         context['object_list'] = TaggedItem.objects.filter(
             tag__slug=self.kwargs['tag'])
-        context['actualsidebar'] = ActualSlider.objects.latest('date')
+        context['actualsidebar'] = ActualSlider.objects.order_by('-date')[:6]
+        #context['actualsidebar'] = ActualSlider.objects.latest('date')
         return context
 
 from django.views.generic.dates import DayArchiveView
@@ -52,8 +53,10 @@ class ItemDayArchiveView(DayArchiveView):
 
     def get_context_data(self, **kwargs):
         context = super(ItemDayArchiveView, self).get_context_data(**kwargs)
-        if len(self.object_list) > 3:
-            context['actualsidebar'] = ActualSlider.objects.latest('date')
+        #if len(self.object_list) > 3:
+        #    context['actualsidebar'] = ActualSlider.objects.order_by('-date')[:6]
+        #    #context['actualsidebar'] = ActualSlider.objects.latest('date')
+        context['actualsidebar'] = ActualSlider.objects.order_by('-date')[:6]
         context['advs'] = ContentItem.objects.filter(
             category__slug='recommendations')[:1]
         cr_date = datetime(
