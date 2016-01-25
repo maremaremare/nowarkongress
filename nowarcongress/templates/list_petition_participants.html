@@ -1,81 +1,56 @@
-
 {% extends "leftsidebar.html" %}
-
+{% autoescape off %}
 {% load customtags %}
 {% load fb_versions %}
+
 {% set title %}Заявление Конгресса "{{object.title}}" &ndash; все подписи{% endset %}
 {% set description %}Заявление Конгресса интеллигенции "{{object.title}}" &ndash; список подписавшихся {% endset %}
 
-
 {% block maincontent %}
-
 <h1 class="article-h1"><a href="{{object.text.get_absolute_url}}">Заявление Конгресса "{{object.title}}" &ndash; все подписи</a></h1>
 <div class="spacer-1" style="background:#BCBCBC;color:#BCBCBC;"></div>
 
-
-
 <div class="blog-style">
-
-
 {% for person in participants %}
 {% if person.is_shown %}
-  
-
   <div class="list-people-item">
   <h5><strong>{{person.first_name}} {{person.second_name}}</strong>{% if person.occupation %}, <span class="lower">{{person.occupation}}</span>
-  {% endif %}  {% if person.city %}
+  {% endif %}  
+  {% if person.city %}
     ({{person.city}})
-  {% endif %}</h5>{% if not forloop.last %},{% endif %}
+  {% endif %}</h5>
+  {% if not forloop.last %},{% endif %}
   </div>
   {% endif %}
 {% endfor %}
-                                
-    
 
-                            <!-- END .block-content -->
-                            </div>
-
-
+<!-- END .block-content -->
+</div>
 {% endblock maincontent %}
 
+
 {% block sidebar1 %}
-
-
-
 <div class="widget">
-                            <h3>Заявления Конгресса</h3>
-                
-                            <div class="w-news-list">
-                     
+<h3>Заявления Конгресса</h3>
+<div class="w-news-list">
 
-                          
-                
-                                {% for item in allpetitions %}
-                           
-                          
-                                                                    <!-- BEGIN .item -->
-                                <div class="item">
-                              
-                                        <h4><a href="{{item.get_absolute_url}}">{{item.title}}</a></h4>
-                                        <p>{{item.text|striptags|no_dumb_chars|truncatewords_html:"15"}}</p>
-                                        <div class="item-foot">
-                                            <a href="{{item.get_absolute_url}}"></i><b>Читать полностью</b></a>
-                                      
+{% for item in allpetitions %}
+<div class="item">
+<!-- BEGIN .item -->
+  <h4><a href="{{item.get_absolute_url}}">{{item.title}}</a></h4>
+  <p>{{item.text|striptags|no_dumb_chars|truncatewords_html:"15"}}</p>
+  <div class="item-foot">
+    <a href="{{item.get_absolute_url}}"></i><b>Читать полностью</b></a>
+  </div>
+<!-- END .item -->
+</div>
+{% endfor %}
 
-                                        
-                     
-                                        </div>
-                                    
-                                <!-- END .item -->
-                                </div>
-                                {% endfor %}
+</div>
+<!-- END .widget -->
+</div>
 
-                                
-                              
-
-                            </div>
-                        <!-- END .widget -->
-                        </div>
-    
 {% endblock sidebar1 %}
+
+{% endautoescape %}
 
