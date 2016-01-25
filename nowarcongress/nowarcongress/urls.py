@@ -1,5 +1,6 @@
 from django.conf.urls import patterns, include, url
 from django.views.generic import TemplateView
+from django.views.decorators.cache import cache_page
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -32,7 +33,7 @@ def yandex(request):
 
 urlpatterns = patterns('',
                        url(r'^$',
-                           HomePageView.as_view()),
+                           cache_page(600)(HomePageView.as_view())),
 
                        # Examples:
                        # url(r'^$', 'nowarkongress.views.home', name='home'),
@@ -56,7 +57,7 @@ urlpatterns = patterns('',
                        url(r'^tags/(?P<tag>[-\w]+)/', TagListView.as_view()),
                        url(r'^themes/(?P<slug>\w+)/', TopicListView.as_view()),
                        url(r'^about_congress/', MainAboutView.as_view()),
-                       url(r'^petition/(?P<pk>\d+)/people/', ParticipantsView.as_view()),
+                       url(r'^petition/(?P<pk>\d+)/people/', cache_page(600)(ParticipantsView.as_view())),
                        url(r'^petition/(?P<pk>\d+)/addme/', AddNameToPetitionView.as_view()),
 
                        url(r'^petition/(?P<petition>\d+)/addouter/again/', AddOuterNameToPetitionView.as_view()),
